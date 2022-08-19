@@ -1,0 +1,30 @@
+{
+  "name": "cloud-messanger",
+  "version": "1.0.0",
+  "description": "---",
+  "scripts": {
+    "dev": "parcel src/pages/index.hbs",
+    "build": "dotenv cross-var parcel build %INDEX_PAGE% %REGISTER_PAGE% %ACCOUNT_PAGE% %MESSAGES_PAGE% %404_PAGE% %500_PAGE%",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samgxlden/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "Semyon Fedoseev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samgxlden/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/samgxlden/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "@parcel/transformer-sass": "^2.7.0",
+    "parcel": "^2.7.0",
+    "cross-var": "^1.1.0",
+    "dotenv-cli": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}
