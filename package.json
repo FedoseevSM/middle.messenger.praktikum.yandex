@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
-    "dev": "dotenv cross-var parcel %INDEX_PAGE% %REGISTER_PAGE% %ACCOUNT_PAGE% %MESSAGES_PAGE% %404_PAGE% %500_PAGE%",
-    "build": "dotenv cross-var parcel build %INDEX_PAGE% %REGISTER_PAGE% %ACCOUNT_PAGE% %MESSAGES_PAGE% %404_PAGE% %500_PAGE%",
+    "dev": "rm -rf dist .parcel-cache && dotenv cross-var parcel %INDEX_PAGE% %REGISTER_PAGE% %ACCOUNT_PAGE% %MESSAGES_PAGE% %404_PAGE% %500_PAGE%",
+    "build": "rm -rf dist .parcel-cache && dotenv cross-var parcel build %INDEX_PAGE% %REGISTER_PAGE% %ACCOUNT_PAGE% %MESSAGES_PAGE% %404_PAGE% %500_PAGE%",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "reset": "rm -rf dist .parcel-cache"
