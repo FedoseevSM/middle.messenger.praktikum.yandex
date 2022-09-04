@@ -1,10 +1,10 @@
-import Block from "../../utils/Block"
-import template from "./RegisterMain.template.hbs"
+import Block from "../../utils/Block";
+import template from "./RegisterMain.template.hbs";
 
 class RegisterMain extends Block {
-  render() {
-    return this.compile(template, this.props)
-  }
+    render() {
+        return this.compile(template, this.props);
+    }
 }
 
-export default RegisterMain
+export default RegisterMain;

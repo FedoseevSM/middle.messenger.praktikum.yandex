@@ -1,24 +1,23 @@
-import Block from "../../utils/Block"
-import template from "../../layouts/auth/auth.template.hbs"
+import Block from "../../utils/Block";
+import template from "../../layouts/auth/auth.template.hbs";
 
-import RegisterMain from "../../components/RegisterMain/RegisterMain"
-import RegisterHeader from "../../components/RegisterHeader/RegisterHeader"
+import RegisterMain from "../../components/RegisterMain/RegisterMain";
+import RegisterHeader from "../../components/RegisterHeader/RegisterHeader";
 
 const props = {
-  title: "Регистрация",
-}
+    title: "Регистрация",
+};
 
 class RegisterPage extends Block {
+    init() {
+        this.children.header = new RegisterHeader();
 
-  init() {
-    this.children.header = new RegisterHeader()
-  
-    this.children.main = new RegisterMain("div", props)
-  }
+        this.children.main = new RegisterMain("div", props);
+    }
 
-  render() {
-    return this.compile(template, props)
-  }
+    render() {
+        return this.compile(template, props);
+    }
 }
 
-export default RegisterPage
+export default RegisterPage;
