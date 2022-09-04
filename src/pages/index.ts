@@ -18,7 +18,4 @@ document.addEventListener("DOMContentLoaded", async () => {
         .use("/500", Error500Page)
         .use("*", Error404Page)
         .start();
-
-
-
 });

@@ -73,18 +73,23 @@ class Router {
     public forward() {
         this.history.forward();
     }
-private _hasRoute(pathname: string) {
+
+    public getRoute(pathname: string) {
+        return this.routes.find((route) => route.match(pathname));
+    }
+
+    public getLocationPathname() {
+        return window.location.pathname;
+    }
+
+    private _hasRoute(pathname: string) {
         if (!this._pathnames.includes(pathname)) {
             return "*";
         }
         return pathname;
     }
 
-    
-    public getRoute(pathname: string) {
-        return this.routes.find((route) => route.match(pathname));
-    }
-private _onRoute(pathname: string) {
+    private _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
 
         if (!route) {
@@ -98,12 +103,6 @@ private _onRoute(pathname: string) {
         if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
             this._onRouteCallback();
         }
-    }
-
-    
-
-    public getLocationPathname() {
-        return window.location.pathname;
     }
 }
 

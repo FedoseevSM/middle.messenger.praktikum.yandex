@@ -19,7 +19,7 @@ class LoginPage extends Block {
     }
 
     render() {
-        console.log('Привет мир!');
+        console.log("Привет мир!");
         return this.compile(template, props);
     }
 }

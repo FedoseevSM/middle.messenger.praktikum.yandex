@@ -15,27 +15,26 @@ export interface SignInData {
 }
 
 export default class AuthAPI extends BaseAPI {
-    constructor() {
-        super('/auth');
-    }
-
-    signUp(data: SignUpData): Promise<unknown> {
-        return this.http.post('/signup', data);
-    }
-
-    singIn(data: SignInData): Promise<unknown> {
-        return this.http.post('/signin', data);
-    }
-
-    logout(): Promise<unknown> {
-        return this.http.post('/logout');
-    }
-
-    read(): Promise<unknown> {
-        return this.http.get('/user');
-    }
-
     create = undefined;
     update = undefined;
     delete = undefined;
+    constructor() {
+        super("/auth");
+    }
+
+    signUp(data: SignUpData): Promise<unknown> {
+        return this.http.post("/signup", data);
+    }
+
+    singIn(data: SignInData): Promise<unknown> {
+        return this.http.post("/signin", data);
+    }
+
+    logout(): Promise<unknown> {
+        return this.http.post("/logout");
+    }
+
+    read(): Promise<unknown> {
+        return this.http.get("/user");
+    }
 }

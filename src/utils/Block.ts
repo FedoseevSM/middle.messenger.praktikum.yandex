@@ -94,6 +94,22 @@ class Block {
 
         return temp.content;
     }
+
+    // }
+    getContent() {
+        return this.element;
+    }
+
+    //   }
+    show() {
+        this.getContent()!.style.display = "block";
+    }
+
+    //     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    hide() {
+        this.getContent()!.style.display = "none";
+    }
+
     _getChildrenAndProps(childrenAndProps: any) {
         const props: Record<string, any> = {};
         const children: Record<string, Block> = {};
@@ -109,11 +125,7 @@ class Block {
         return { props, children };
     }
 
-    // }
-getContent() {
-        return this.element;
-    }
-_addEvents() {
+    _addEvents() {
         const { events = {} } = this.props as {
             events: Record<string, () => void>;
         };
@@ -130,17 +142,11 @@ _addEvents() {
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
-    
-
     _createResources() {
         const { tagName } = this._meta;
         this._element = this._createDocumentElement(tagName);
     }
 
-    //   }
-    show() {
-        this.getContent()!.style.display = "block";
-    }
     private _init() {
         this._createResources();
 
@@ -149,22 +155,13 @@ _addEvents() {
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    //     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-hide() {
-        this.getContent()!.style.display = "none";
-    }
-_componentDidMount() {
+    _componentDidMount() {
         this.componentDidMount();
     }
 
     // private _componentDidUpdate(oldProps: any, newProps: any) {
     //   if (this.componentDidUpdate(oldProps, newProps)) {
-    
-    
 
-    
-
-    
     private _render() {
         const fragment = this.render();
 
@@ -204,6 +201,7 @@ _componentDidMount() {
         // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
+
     protected render(): DocumentFragment {
         return new DocumentFragment();
     }

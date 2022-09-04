@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
-    "qqdev": "parcel src/pages/index.hbs src/pages/**/*.hbs --no-cache --no-source-maps",
-    "qqbuild": "parcel build src/pages/index.hbs src/pages/**/*.hbs --no-cache --no-source-maps",
     "start": "npm run build && node server.js",
     "dev": "parcel src/pages/index.html --no-cache --no-source-maps",
+    "build": "parcel build src/pages/index.html --no-cache --no-source-maps",
     "reset": "rimraf dist .parcel-cache",
-    "lint-sass": "stylelint src/styles/*.sass"
+    "lint-sass": "stylelint src/styles/*.sass",
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "@typescript-eslint/parser": "5.36.1",
     "eslint": "8.23.0",
-    "@tinkoff/eslint-config": "^1.36.1",
+    "@tinkoff/eslint-config": "1.36.1",
     "express": "4.18.1",
     "express-history-api-fallback": "2.2.1",
     "helmet": "6.0.0",
