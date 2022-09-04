@@ -2,7 +2,7 @@ import Block from "../../utils/Block"
 import template from "../../layouts/empty/empty.template.hbs"
 
 const props = { 
-  title: "Home page", 
+  title: "Нет соединения", 
   description: "500" 
 }
 
