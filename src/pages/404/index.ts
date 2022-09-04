@@ -1,18 +1,15 @@
-import Block from '../../utils/Block';
-import template from './404.template.hbs';
+import Block from "../../utils/Block"
+import template from "../../layouts/empty/empty.template.hbs"
 
-interface PageProps {
-  title: string;
+const props = { 
+  title: "Страница не найдена", 
+  description: "404" 
 }
 
 class Error404Page extends Block {
-  constructor(tagName: string, props: PageProps) {
-    super('div', props);
-  }
-
   render() {
-    return this.compile(template, this.props);
+    return this.compile(template, props)
   }
 }
 
-export default Error404Page;
+export default Error404Page
