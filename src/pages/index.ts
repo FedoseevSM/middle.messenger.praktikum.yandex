@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         .use("/account", AccountPage)
         .use("/messages", MessagesPage)
         .use("/500", Error500Page)
-        .use("/404", Error404Page)
+        .use("*", Error404Page)
         .start();
+
+
+
 });
