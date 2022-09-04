@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "---",
   "scripts": {
-    "dev": "parcel src/pages/index.hbs src/pages/**/*.hbs --no-cache --no-source-maps",
-    "build": "parcel build src/pages/index.hbs src/pages/**/*.hbs --no-cache --no-source-maps",
+    "qqdev": "parcel src/pages/index.hbs src/pages/**/*.hbs --no-cache --no-source-maps",
+    "qqbuild": "parcel build src/pages/index.hbs src/pages/**/*.hbs --no-cache --no-source-maps",
     "start": "npm run build && node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/pages/index.html --no-cache --no-source-maps",
     "reset": "rimraf dist .parcel-cache"
   },
   "repository": {
@@ -21,13 +21,28 @@
   "homepage": "https://github.com/samgxlden/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@parcel/resolver-glob": "2.7.0",
     "@parcel/transformer-sass": "2.7.0",
-    "parcel": "2.7.0"
+    "@types/uuid": "8.3.4",
+    "handlebars": "4.7.7",
+    "nanoid": "^4.0.0",
+    "parcel": "2.7.0",
+    "typescript": "4.8.2",
+    "uuid": "8.3.2"
   },
   "dependencies": {
     "express": "4.18.1",
+    "express-history-api-fallback": "2.2.1",
+    "helmet": "6.0.0",
     "morgan": "1.10.0",
     "rimraf": "3.0.2"
+  },
+  "targets": {
+    "modern": {
+      "engines": {
+        "browsers": ">=50%"
+      }
+    }
   },
   "engines": {
     "node": ">=12"

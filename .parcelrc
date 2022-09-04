@@ -4,5 +4,6 @@
     "*.hbs": [
       "@anikin/parcel-transformer-handlebars-precompile"
     ]
-  }
+  },
+  "resolvers": ["@parcel/resolver-glob", "..."]
 }
