@@ -1,10 +1,11 @@
-import Error404Page from "./404";
-import Error500Page from "./500";
-import LoginPage from "./login";
 import Router from "../utils/Router";
-import RegisterPage from "./register";
-import AccountPage from "./account";
-import MessagesPage from "./messages";
+
+import Error404Page from "./404/index";
+import Error500Page from "./500/index";
+import LoginPage from "./login/index";
+import RegisterPage from "./register/index";
+import AccountPage from "./account/index";
+import MessagesPage from "./messages/index";
 // import * as pages from "./**/*.ts"
 
 document.addEventListener("DOMContentLoaded", async () => {

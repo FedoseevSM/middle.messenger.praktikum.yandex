@@ -1,0 +1,12 @@
+// Defaut
+@import "reset";
+@import "variables";
+
+// Layouts
+@import "../layouts/auth/auth";
+@import "../layouts/empty/empty";
+
+// Style
+body {
+  font-family: "Segoe UI", sans-serif;
+}
