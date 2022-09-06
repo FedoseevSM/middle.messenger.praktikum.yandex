@@ -6,6 +6,13 @@ export enum StoreEvents {
     Updated = "updated",
 }
 
+export enum FetchStatus {
+    Idle = "idle",
+    Loading = "loading",
+    Fullfilled = "fullfilled",
+    Rejected = "rejected",
+}
+
 interface User {
     id: number;
     first_name: string;
@@ -17,12 +24,21 @@ interface User {
     avatar: string;
 }
 
+export interface ApiError {
+    reason: string;
+}
+
 interface StoreData {
     currentUser?: User;
+    loginStatus: FetchStatus;
+    loginErrors: ApiError | null;
 }
 
 export class Store extends EventBus {
-    private state: StoreData = {};
+    private state: StoreData = {
+        loginStatus: FetchStatus.Idle,
+        loginErrors: null,
+    };
 
     public getState() {
         return this.state;
@@ -62,3 +78,4 @@ export const withStore =
     };
 
 export default store;
+

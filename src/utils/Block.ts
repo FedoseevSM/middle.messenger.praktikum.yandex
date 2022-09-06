@@ -26,16 +26,15 @@ class Block {
     };
 
     private _element!: HTMLElement;
-    private _meta: { tagName: string; props: any };
+    private _meta: { props: any };
 
-    constructor(tagName = "div", propsWithChildren: any = {}) {
+    constructor(propsWithChildren: any = {}) {
         const eventBus = new EventBus();
 
         const { props, children } =
             this._getChildrenAndProps(propsWithChildren);
 
         this._meta = {
-            tagName,
             props,
         };
 
@@ -59,12 +58,20 @@ class Block {
         );
     }
 
-    //   return true;
+    componentDidUpdate(oldProps: any, newProps: any) {
+        return true;
+    }
+
+    _componentDidUpdate(oldProps: any, newProps: any) {
+        if (this.componentDidUpdate(oldProps, newProps)) {
+            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        }
+    }
+
     get element() {
         return this._element;
     }
 
-    // protected componentDidUpdate(oldProps: any, newProps: any) {
     protected compile(template: (context: any) => string, context: any) {
         const contextAndStubs = { ...context };
 
@@ -95,17 +102,14 @@ class Block {
         return temp.content;
     }
 
-    // }
     getContent() {
         return this.element;
     }
 
-    //   }
     show() {
         this.getContent()!.style.display = "block";
     }
 
-    //     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     hide() {
         this.getContent()!.style.display = "none";
     }
@@ -135,16 +139,30 @@ class Block {
         });
     }
 
+    _removeEvents() {
+        const { events } = this.props as any;
+
+        if (!events || !this._element) {
+            return;
+        }
+
+        Object.entries(events).forEach(([event, listener]) => {
+            this._element!.removeEventListener(
+                event,
+                listener as EventListenerOrEventListenerObject
+            );
+        });
+    }
+
     _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-        // eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     }
 
     _createResources() {
-        const { tagName } = this._meta;
-        this._element = this._createDocumentElement(tagName);
+        this._element = this._createDocumentElement("template");
     }
 
     private _init() {
@@ -159,16 +177,18 @@ class Block {
         this.componentDidMount();
     }
 
-    // private _componentDidUpdate(oldProps: any, newProps: any) {
-    //   if (this.componentDidUpdate(oldProps, newProps)) {
-
     private _render() {
         const fragment = this.render();
 
-        this._element!.innerHTML = "";
+        this._removeEvents();
+        const newElement = fragment.firstElementChild!;
 
-        this._element!.append(fragment);
+        if (this._element) {
+            this._removeEvents();
+            this._element.replaceWith(newElement);
+        }
 
+        this._element = newElement as HTMLElement;
         this._addEvents();
     }
 
@@ -208,3 +228,4 @@ class Block {
 }
 
 export default Block;
+

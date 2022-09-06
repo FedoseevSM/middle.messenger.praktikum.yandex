@@ -5,23 +5,38 @@ import LoginFooter from "../../components/LoginFooter/LoginFooter";
 import LoginHeader from "../../components/LoginHeader/LoginHeader";
 import LoginMain from "../../components/LoginMain/LoginMain";
 
-const props = {
-    title: "Авторизация",
-};
+import AuthController from "../../controllers/AuthController";
+import { SignInData } from "../../api/AuthAPI";
 
 class LoginPage extends Block {
-    init() {
-        this.children.header = new LoginHeader();
+    constructor() {
+        const handleSubmit = () => {
+            const inputs = main.getContent().querySelectorAll("input");
+            const data = Array.from(inputs).reduce((acc, input) => {
+                acc[input.name as keyof SignInData] = input.value;
+                return acc;
+            }, {} as Partial<SignInData>);
 
-        this.children.main = new LoginMain("div", props);
+            AuthController.signIn(data as SignInData);
+        };
 
-        this.children.footer = new LoginFooter();
+        const main = new LoginMain({ title: "Авторизация" });
+        const header = new LoginHeader({
+            onSubmit: handleSubmit,
+        });
+        const footer = new LoginFooter();
+
+        super({
+            header,
+            main,
+            footer,
+        });
     }
 
     render() {
-        console.log("Привет мир!");
-        return this.compile(template, props);
+        return this.compile(template, this.props);
     }
 }
 
 export default LoginPage;
+

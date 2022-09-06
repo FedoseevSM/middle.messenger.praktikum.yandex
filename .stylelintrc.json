@@ -10,10 +10,12 @@
    "rule-empty-line-before": "never-multi-line"
  },
  "ignoreFiles": [
+     "*.js",
+     ".eslintrc.cjs",
      "src/**/*.html",
      "src/**/*.ts",
      "src/**/*.js",
-     "dist/*.css",
-     "dist/*.html"
+     "dist/*",
+     "node_modules/**/*"
   ]
 }

@@ -1,6 +1,6 @@
 import type { SignInData, SignUpData } from "../api/AuthAPI";
 import AuthAPI from "../api/AuthAPI";
-import store from "../utils/Store";
+import store, { FetchStatus } from "../utils/Store";
 import Router from "../utils/Router";
 
 export interface ControllerSignUpData extends SignUpData {
@@ -9,9 +9,11 @@ export interface ControllerSignUpData extends SignUpData {
 
 class AuthController {
     private api: AuthAPI;
+    private router: Router;
 
     constructor() {
         this.api = new AuthAPI();
+        this.router = new Router("#app");
     }
 
     async signUp(data: ControllerSignUpData) {
@@ -26,47 +28,44 @@ class AuthController {
         store.set("currentUser.isLoading", true);
 
         try {
-            const response = await this.api.signUp(signUpData);
-        } catch (e) {
-            store.set("currentUser.error", response.reason);
+            await this.api.signUp(signUpData);
+        } catch (err) {
+            store.set("currentUser.error", err.reason);
             store.set("currentUser.isLoading", false);
 
             return;
         }
 
-        if (response.reason) {
-            store.set("currentUser.error", response.reason);
-
-            return;
-        }
-
-        await this.fetchUser();
-
-        const router = new Router();
-
-        router.go("/account");
+        try {
+            await this.fetchUser();
+            this.router.go("/account");
+        } catch (err) {}
     }
 
     async signIn(data: SignInData) {
-        await this.api.singIn(data);
-
-        const router = new Router();
-
-        router.go("/account");
+        store.set("loginStatus", FetchStatus.Loading);
+        try {
+            await this.api.singIn(data);
+            this.router.go("/account");
+            store.set("loginStatus", FetchStatus.Fullfilled);
+        } catch (err) {
+            store.set("loginStatus", FetchStatus.Rejected);
+            store.set("loginErrors", err.reason);
+        }
     }
 
     async logout() {
-        await this.api.logout();
-
-        const router = new Router();
-
-        router.go("/login");
+        try {
+            await this.api.logout();
+            this.router.go("/login");
+        } catch (err) {}
     }
 
     async fetchUser() {
-        const user = await this.api.read();
-
-        store.set("currentUser", user);
+        try {
+            const user = await this.api.read();
+            store.set("currentUser", user);
+        } catch (err) {}
     }
 }
 
