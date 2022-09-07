@@ -31,6 +31,12 @@ class Route {
         return this._pathname;
     }
 
+    public leave() {
+        if (this._block) {
+            this._block.destroy();
+        }
+    }
+
     public match(pathname: string) {
         return isEqual(pathname, this._pathname);
     }

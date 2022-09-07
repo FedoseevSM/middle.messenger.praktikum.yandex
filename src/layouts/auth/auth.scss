@@ -52,6 +52,10 @@
   padding: 10px 40px;
   border-radius: 10px;
 }
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
 .auth-link {
   color: $darkBlue;
   font-size: 18px;
@@ -71,4 +75,10 @@
   &:focus {
     border-bottom: 3px solid $darkBlue;
   }
+}
+.alert {
+  background-color: #e37878;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
 }

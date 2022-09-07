@@ -2,13 +2,13 @@ import Route from "./Route";
 import type Block from "./Block";
 
 class Router {
-    public routes: Route[] = [];
-    public history!: History;
-    private _currentRoute!: Route | null;
-    private _rootQuery!: string;
-    private _pathnames!: string[];
-    private _onRouteCallback!: () => void;
-    private _unprotectedPaths!: `/${string}`[];
+    public routes: Route[];
+    public history: History;
+    private _currentRoute: Route | null;
+    private _rootQuery: string;
+    private _pathnames: string[];
+    private _onRouteCallback: () => void;
+    private _unprotectedPaths: `/${string}`[];
     static __instance: Router;
 
     constructor(rootQuery: string) {
@@ -73,27 +73,26 @@ class Router {
     public forward() {
         this.history.forward();
     }
-
-    public getRoute(pathname: string) {
-        return this.routes.find((route) => route.match(pathname));
-    }
-
-    public getLocationPathname() {
-        return window.location.pathname;
-    }
-
-    private _hasRoute(pathname: string) {
+private _hasRoute(pathname: string) {
         if (!this._pathnames.includes(pathname)) {
             return "*";
         }
         return pathname;
     }
 
-    private _onRoute(pathname: string) {
+    
+    public getRoute(pathname: string) {
+        return this.routes.find((route) => route.match(pathname));
+    }
+private _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
 
         if (!route) {
             return;
+        }
+
+        if (this._currentRoute) {
+            this._currentRoute.leave();
         }
 
         this._currentRoute = route;
@@ -103,6 +102,12 @@ class Router {
         if (!this._unprotectedPaths.includes(pathname as `/${string}`)) {
             this._onRouteCallback();
         }
+    }
+
+    
+
+    public getLocationPathname() {
+        return window.location.pathname;
     }
 }
 

@@ -38,6 +38,7 @@ class LoginHeader extends Block {
         this.children.errors.setProps({
             isValid: this.props.loginStatus !== FetchStatus.Rejected,
             text: this.props.loginErrors,
+            className: "alert",
         });
 
         return this.compile(template, this.props);

@@ -1,7 +1,7 @@
 {{#if isValid}}
     <div style="display: none;"/>
 {{else}}
-    <div>
+    <div {{#if className}}class={{className}}{{/if}}>
         {{ text }}
     </div>
 {{/if}}

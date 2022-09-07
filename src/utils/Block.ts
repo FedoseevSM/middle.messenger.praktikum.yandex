@@ -53,6 +53,7 @@ class Block {
         return true;
     }
 
+    public onDestroy() {}
     protected init() {}
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -107,6 +108,12 @@ class Block {
     hide() {
         this.getContent()!.style.display = "none";
     }
+
+    public destroy() {
+        this._element.remove();
+        this.onDestroy();
+    }
+
     _componentDidUpdate(oldProps: any, newProps: any) {
         if (this.componentDidUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
