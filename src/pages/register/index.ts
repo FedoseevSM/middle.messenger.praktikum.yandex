@@ -12,7 +12,7 @@ class RegisterPage extends Block {
     init() {
         this.children.header = new RegisterHeader();
 
-        this.children.main = new RegisterMain("div", props);
+        this.children.main = new RegisterMain(props);
     }
 
     render() {

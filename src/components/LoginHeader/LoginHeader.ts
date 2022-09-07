@@ -11,7 +11,7 @@ interface LoginHeaderProps {
     loginStatus?: FetchStatus;
 }
 
-const mapStateToProps = ({ loginStatus, loginErrors }) => ({
+const mapStateToProps = ({ loginStatus, loginErrors }: any) => ({
     loginStatus,
     loginErrors,
 });
@@ -33,6 +33,7 @@ class LoginHeader extends Block {
             props,
         });
     }
+
     render() {
         this.children.errors.setProps({
             isValid: this.props.loginStatus !== FetchStatus.Rejected,

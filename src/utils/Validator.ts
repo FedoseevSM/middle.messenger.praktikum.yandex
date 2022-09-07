@@ -57,7 +57,9 @@ class Validator {
                 return this.phone(value);
             default:
                 const exhaustiveCheck: never = type;
-                throw new Error(`Значение не должно быть пустым: ${exhaustiveCheck}`);
+                throw new Error(
+                    `Значение не должно быть пустым: ${exhaustiveCheck}`
+                );
         }
     }
 }

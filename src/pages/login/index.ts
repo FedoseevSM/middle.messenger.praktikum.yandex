@@ -6,7 +6,7 @@ import LoginHeader from "../../components/LoginHeader/LoginHeader";
 import LoginMain from "../../components/LoginMain/LoginMain";
 
 import AuthController from "../../controllers/AuthController";
-import { SignInData } from "../../api/AuthAPI";
+import type { SignInData } from "../../api/AuthAPI";
 
 class LoginPage extends Block {
     constructor() {
@@ -39,4 +39,3 @@ class LoginPage extends Block {
 }
 
 export default LoginPage;
-

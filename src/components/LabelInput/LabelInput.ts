@@ -1,6 +1,8 @@
 import Block from "../../utils/Block";
-import Validator, { ValidationType } from "../../utils/Validator";
-import { Input, InputProps } from "../Input/Input";
+import type { ValidationType } from "../../utils/Validator";
+import Validator from "../../utils/Validator";
+import type { InputProps } from "../Input/Input";
+import { Input } from "../Input/Input";
 import { Errors } from "../Errors/Errors";
 import template from "./LabelInput.template.hbs";
 
@@ -43,4 +45,3 @@ export class LabelInput extends Block {
         return this.compile(template, this.props);
     }
 }
-

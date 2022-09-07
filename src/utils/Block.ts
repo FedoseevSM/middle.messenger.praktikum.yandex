@@ -49,6 +49,10 @@ class Block {
     }
 
     componentDidMount() {}
+    componentDidUpdate(oldProps: any, newProps: any) {
+        return true;
+    }
+
     protected init() {}
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -56,16 +60,6 @@ class Block {
         Object.values(this.children).forEach((child) =>
             child.dispatchComponentDidMount()
         );
-    }
-
-    componentDidUpdate(oldProps: any, newProps: any) {
-        return true;
-    }
-
-    _componentDidUpdate(oldProps: any, newProps: any) {
-        if (this.componentDidUpdate(oldProps, newProps)) {
-            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-        }
     }
 
     get element() {
@@ -112,6 +106,11 @@ class Block {
 
     hide() {
         this.getContent()!.style.display = "none";
+    }
+    _componentDidUpdate(oldProps: any, newProps: any) {
+        if (this.componentDidUpdate(oldProps, newProps)) {
+            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        }
     }
 
     _getChildrenAndProps(childrenAndProps: any) {
@@ -228,4 +227,3 @@ class Block {
 }
 
 export default Block;
-

@@ -6,4 +6,3 @@ export class Button extends Block {
         return this.compile(template, this.props);
     }
 }
-

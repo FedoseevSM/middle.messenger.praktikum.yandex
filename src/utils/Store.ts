@@ -2,6 +2,17 @@ import { isEqual, set } from "./Helpers";
 import EventBus from "./EventBus";
 import type Block from "./Block";
 
+type __ResourcePath<T, Key extends keyof T> = Key extends string
+  ? T[Key] extends Record<string, unknown>
+    ?
+        | `${Key}.${__ResourcePath<T[Key], Exclude<keyof T[Key], keyof unknown[]>> &
+            string}`
+        | `${Key}.${Exclude<keyof T[Key], keyof unknown[]> & string}`
+    : never
+  : never
+
+type _ResourcePath<T> = __ResourcePath<T, keyof T> | keyof T | string
+
 export enum StoreEvents {
     Updated = "updated",
 }
@@ -44,7 +55,7 @@ export class Store extends EventBus {
         return this.state;
     }
 
-    public set(path: keyof StoreData, value: unknown) {
+    public set(path: _ResourcePath<StoreData>, value: unknown) {
         set(this.state, path, value);
 
         this.emit(StoreEvents.Updated);
