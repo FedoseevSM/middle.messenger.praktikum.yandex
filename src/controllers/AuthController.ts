@@ -3,10 +3,6 @@ import AuthAPI from "../api/AuthAPI";
 import store, { FetchStatus } from "../utils/Store";
 import Router from "../utils/Router";
 
-export interface ControllerSignUpData extends SignUpData {
-    confirm_password: string;
-}
-
 class AuthController {
     private api: AuthAPI;
     private router: Router;
@@ -16,22 +12,15 @@ class AuthController {
         this.router = new Router("#app");
     }
 
-    async signUp(data: ControllerSignUpData) {
-        if (data.confirm_password !== data.password) {
-            store.set("currentUser.error", "Passwords are not the same");
+    async signUp(data: SignUpData) {
 
-            return;
-        }
-
-        const { confirm_password, ...signUpData } = data;
-
-        store.set("currentUser.isLoading", true);
+        store.set("registerStatus", FetchStatus.Loading);
 
         try {
-            await this.api.signUp(signUpData);
+            await this.api.signUp(data);
         } catch (err) {
-            store.set("currentUser.error", err.reason);
-            store.set("currentUser.isLoading", false);
+            store.set("registerErrors", err.reason);
+            store.set("registerStatus", FetchStatus.Rejected);
 
             return;
         }

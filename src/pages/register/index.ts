@@ -1,22 +1,48 @@
 import Block from "../../utils/Block";
 import template from "../../layouts/auth/auth.template.hbs";
 
-import RegisterMain from "../../components/RegisterMain/RegisterMain";
 import RegisterHeader from "../../components/RegisterHeader/RegisterHeader";
+import RegisterMain from "../../components/RegisterMain/RegisterMain";
 
-const props = {
-    title: "Регистрация",
-};
+import AuthController from "../../controllers/AuthController";
+import type { SignUpData } from "../../api/AuthAPI";
 
 class RegisterPage extends Block {
-    init() {
-        this.children.header = new RegisterHeader();
+    constructor() {
+        const handleSubmit = () => {
+            const inputs = main.getContent().querySelectorAll("input");
+            const data = Array.from(inputs).reduce((acc, input) => {
+                acc[input.name as keyof SignUpData] = input.value;
+                if (input.value == "") {
+                    return {
+                        first_name: "null",
+                        second_name: "null",
+                        login: "null",
+                        email: "null@ya.ru",
+                        password: "null",
+                        phone: "79998664744",
+                    };
+                } else {
+                    return acc;
+                }
+            }, {} as Partial<SignUpData>);
 
-        this.children.main = new RegisterMain(props);
+            AuthController.signUp(data as SignUpData);
+        };
+
+        const main = new RegisterMain({ title: "Регистрация" });
+        const header = new RegisterHeader({
+            onSubmit: handleSubmit,
+        });
+
+        super({
+            header,
+            main
+        });
     }
 
     render() {
-        return this.compile(template, props);
+        return this.compile(template, this.props);
     }
 }
 

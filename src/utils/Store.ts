@@ -46,12 +46,16 @@ interface StoreData {
     currentUser?: User;
     loginStatus: FetchStatus;
     loginErrors: ApiError | null;
+    registerStatus: FetchStatus;
+    registerErrors: ApiError | null;
 }
 
 export class Store extends EventBus {
     private state: StoreData = {
         loginStatus: FetchStatus.Idle,
         loginErrors: null,
+        registerStatus: FetchStatus.Idle,
+        registerErrors: null,
     };
 
     public getState() {

@@ -14,7 +14,11 @@ class LoginPage extends Block {
             const inputs = main.getContent().querySelectorAll("input");
             const data = Array.from(inputs).reduce((acc, input) => {
                 acc[input.name as keyof SignInData] = input.value;
-                return acc;
+                if (input.value == "") {
+                    return { login: null, password: null };
+                } else {
+                    return acc;
+                }
             }, {} as Partial<SignInData>);
 
             AuthController.signIn(data as SignInData);
