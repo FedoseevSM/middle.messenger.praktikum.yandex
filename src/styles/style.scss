@@ -6,6 +6,10 @@
 @import "../layouts/auth/auth";
 @import "../layouts/empty/empty";
 
+// Pages
+@import "../pages/messages/messages";
+@import "../pages/account/account";
+
 // Style
 body {
   font-family: "Segoe UI", sans-serif;

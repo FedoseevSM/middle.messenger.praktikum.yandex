@@ -59,7 +59,7 @@ export default class HTTPTransport {
         });
     }
 
-    private request<Response>(
+    private async request <Response>(
         url: string,
         options: Options = { method: Method.Get }
     ): Promise<Response> {
@@ -69,7 +69,7 @@ export default class HTTPTransport {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
 
-            xhr.onreadystatechange = (e) => {
+            xhr.onreadystatechange = (event) => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status < 400) {
                         resolve(xhr.response);
