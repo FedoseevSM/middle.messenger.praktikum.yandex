@@ -1,0 +1,21 @@
+{
+ "extends": "stylelint-config-standard-scss",
+ "rules": {
+   "at-rule-empty-line-before": null,
+   "scss/dollar-variable-pattern": null,
+   "scss/double-slash-comment-whitespace-inside": "always",
+   "color-hex-case": "lower",
+   "selector-class-pattern": null,
+   "alpha-value-notation": "number",
+   "rule-empty-line-before": "never-multi-line"
+ },
+ "ignoreFiles": [
+     "*.js",
+     ".eslintrc.cjs",
+     "src/**/*.html",
+     "src/**/*.ts",
+     "src/**/*.js",
+     "dist/*",
+     "node_modules/**/*"
+  ]
+}

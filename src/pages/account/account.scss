@@ -1,0 +1,55 @@
+.account {
+  display: grid;
+  grid-template-columns: 4em 1fr;
+}
+.drawer {
+  min-height: 100vh;
+  height: 100%;
+  background-color: #fbfbfb;
+  border-right: 1px solid #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.back-btn {
+  background-color: #3369f3;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  align-self: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+}
+
+// User
+.user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user__inner {
+  width: 25em;
+}
+.user__header,
+.user__footer {
+  display: flex;
+  justify-content: center;
+}
+.user__name {
+  display: block;
+  font-weight: 600;
+}
+
+// Params
+.params {
+  display: flex;
+  flex-direction: column;
+}
+.params__item {
+  display: flex;
+  justify-content: space-between;
+}
