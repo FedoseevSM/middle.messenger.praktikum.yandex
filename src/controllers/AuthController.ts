@@ -13,7 +13,6 @@ class AuthController {
     }
 
     async signUp(data: SignUpData) {
-
         store.set("registerStatus", FetchStatus.Loading);
 
         try {

@@ -3,7 +3,7 @@ import template from "./LoginHeader.template.hbs";
 
 import { Button } from "../Button/Button";
 import { Errors } from "../Errors/Errors";
-import { FetchStatus, withStore } from "../../utils/Store";
+import { FetchStatus, withStore, StoreData } from "../../utils/Store";
 
 interface LoginHeaderProps {
     onSubmit: (e: SubmitEvent) => void;
@@ -11,7 +11,7 @@ interface LoginHeaderProps {
     loginStatus?: FetchStatus;
 }
 
-const mapStateToProps = ({ loginStatus, loginErrors }: any) => ({
+const mapStateToProps = ({ loginStatus, loginErrors }: StoreData) => ({
     loginStatus,
     loginErrors,
 });

@@ -22,8 +22,8 @@ export default class AuthAPI extends BaseAPI {
         super("/auth");
     }
 
-    async signUp(data: SignUpData): Promise<unknown> {
-        return await this.http.post("/signup", data);
+    signUp(data: SignUpData): Promise<unknown> {
+        return this.http.post("/signup", data);
     }
 
     singIn(data: SignInData): Promise<unknown> {

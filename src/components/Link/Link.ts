@@ -3,8 +3,14 @@ import template from "./Link.template.hbs";
 
 import Router from "../../utils/Router";
 
+interface LinkProps {
+    href: string;
+    children: string;
+    className?: string;
+}
+
 export class Link extends Block {
-    constructor({ href, children , className}: any) {
+    constructor({ href, children, className }: LinkProps) {
         const router = new Router("#app");
         super({
             events: {
@@ -15,7 +21,7 @@ export class Link extends Block {
             },
             children,
             className,
-            href
+            href,
         });
     }
 

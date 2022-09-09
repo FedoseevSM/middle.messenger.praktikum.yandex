@@ -42,7 +42,7 @@ export interface ApiError {
     reason: string;
 }
 
-interface StoreData {
+export interface StoreData {
     currentUser?: User;
     loginStatus: FetchStatus;
     loginErrors: ApiError | null;
@@ -74,10 +74,10 @@ const store = new Store();
 export const withStore =
     (mapStateToProps: (state: StoreData) => Record<string, unknown>) =>
     (Component: typeof Block) => {
-        let state: any;
+        let state: Record<string, unknown>;
 
         return class extends Component {
-            constructor(props: any) {
+            constructor(props: object) {
                 state = mapStateToProps(store.getState());
 
                 super({ ...props, ...state });

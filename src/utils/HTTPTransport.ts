@@ -8,7 +8,7 @@ export enum Method {
 
 type Options = {
     method: Method;
-    data?: any;
+    data?: unknown;
 };
 
 export default class HTTPTransport {
@@ -59,7 +59,7 @@ export default class HTTPTransport {
         });
     }
 
-    private async request <Response>(
+    private async request<Response>(
         url: string,
         options: Options = { method: Method.Get }
     ): Promise<Response> {
@@ -69,7 +69,7 @@ export default class HTTPTransport {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
 
-            xhr.onreadystatechange = (event) => {
+            xhr.onreadystatechange = () => {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status < 400) {
                         resolve(xhr.response);

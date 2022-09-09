@@ -12,12 +12,13 @@ class Error500Page extends Block {
     constructor() {
         const link = new Link({
             children: "Назад к чатам",
-            href: "/"
+            href: "/",
         });
         super({
-            link
+            link,
         });
     }
+
     render() {
         return this.compile(template, props);
     }

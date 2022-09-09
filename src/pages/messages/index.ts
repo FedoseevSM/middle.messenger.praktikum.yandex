@@ -1,5 +1,5 @@
 import Block from "../../utils/Block";
-import template from "../messages/messages.template.hbs";
+import template from "./messages.template.hbs";
 
 const props = {
     title: "Сообщения",

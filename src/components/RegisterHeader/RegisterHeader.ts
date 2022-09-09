@@ -3,7 +3,7 @@ import template from "./RegisterHeader.template.hbs";
 
 import { Button } from "../Button/Button";
 import { Errors } from "../Errors/Errors";
-import { FetchStatus, withStore } from "../../utils/Store";
+import { FetchStatus, withStore, StoreData } from "../../utils/Store";
 
 interface RegisterHeaderProps {
     onSubmit: (e: SubmitEvent) => void;
@@ -11,7 +11,7 @@ interface RegisterHeaderProps {
     registerStatus?: FetchStatus;
 }
 
-const mapStateToProps = ({ registerStatus, registerErrors }: any) => ({
+const mapStateToProps = ({ registerStatus, registerErrors }: StoreData) => ({
     registerStatus,
     registerErrors,
 });

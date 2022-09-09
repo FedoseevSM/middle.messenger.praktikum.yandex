@@ -1,5 +1,5 @@
 import Block from "../../utils/Block";
-import template from "../account/account.template.hbs";
+import template from "./account.template.hbs";
 
 import { Button } from "../../components/Button/Button";
 import { Link } from "../../components/Link/Link";
@@ -8,7 +8,7 @@ import AuthController from "../../controllers/AuthController";
 
 const props = {
     title: "Профиль",
-    description: "404"
+    description: "404",
 };
 
 class AccountPage extends Block {
@@ -25,11 +25,11 @@ class AccountPage extends Block {
         const link = new Link({
             children: "<-",
             href: "/messages",
-            className: "back-btn"
+            className: "back-btn",
         });
         super({
             logout,
-            link
+            link,
         });
     }
 

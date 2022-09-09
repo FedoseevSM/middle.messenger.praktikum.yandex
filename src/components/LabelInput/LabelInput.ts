@@ -10,6 +10,7 @@ export interface LabelInputProps extends InputProps {
     labelClassName: string;
     labelText: string;
     validationType: ValidationType;
+    message: string;
 }
 
 export class LabelInput extends Block {
@@ -17,6 +18,7 @@ export class LabelInput extends Block {
         labelClassName,
         labelText,
         validationType,
+        message,
         ...inputProps
     }: LabelInputProps) {
         const errors = new Errors();
@@ -24,7 +26,7 @@ export class LabelInput extends Block {
             ...inputProps,
             onBlur: (event) => {
                 const { value } = event.target as HTMLInputElement;
-                const [isValid, message] = Validator.validate(
+                const isValid = Validator.validate(
                     validationType,
                     value
                 );

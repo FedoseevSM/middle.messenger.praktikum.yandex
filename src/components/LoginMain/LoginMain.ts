@@ -1,6 +1,6 @@
 import { LabelInput } from "../LabelInput/LabelInput";
 import Block from "../../utils/Block";
-import Validator, { ValidationType } from "../../utils/Validator";
+import { ValidationType } from "../../utils/Validator";
 import template from "./LoginMain.template.hbs";
 
 interface LoginMainProps {
@@ -15,6 +15,7 @@ class LoginMain extends Block {
             type: "text",
             className: "auth-input",
             validationType: ValidationType.Login,
+            message: "Логин должен состояить из латинских букв и цифр, также допустимы символы _ и -"
         });
 
         const passwordInput = new LabelInput({
@@ -24,6 +25,7 @@ class LoginMain extends Block {
             type: "password",
             className: "auth-input",
             validationType: ValidationType.Password,
+            message: "Пароль должен содержать одну заглавную букву и одну цифру"
         });
 
         super({

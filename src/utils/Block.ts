@@ -3,7 +3,6 @@ import EventBus from "./EventBus";
 
 export type TProps = Record<string, any>;
 
-// Нельзя создавать экземпляр данного класса
 class Block {
     static EVENTS = {
         INIT: "init",
@@ -16,7 +15,7 @@ class Block {
     protected props: any;
     public children: Record<string, Block>;
     private eventBus: () => EventBus;
-    // }
+
     setProps = (nextProps: any) => {
         if (!nextProps) {
             return;
@@ -199,7 +198,6 @@ class Block {
     }
 
     _makePropsProxy(props: any) {
-        // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
         const self = this;
 
         return new Proxy(props, {
@@ -212,8 +210,6 @@ class Block {
 
                 target[prop] = value;
 
-                // Запускаем обновление компоненты
-                // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
@@ -224,7 +220,6 @@ class Block {
     }
 
     _createDocumentElement(tagName: string) {
-        // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 

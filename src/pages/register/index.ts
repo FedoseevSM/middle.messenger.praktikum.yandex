@@ -22,9 +22,8 @@ class RegisterPage extends Block {
                         password: "null",
                         phone: "79998664744",
                     };
-                } else {
-                    return acc;
                 }
+                return acc;
             }, {} as Partial<SignUpData>);
 
             AuthController.signUp(data as SignUpData);
@@ -37,7 +36,7 @@ class RegisterPage extends Block {
 
         super({
             header,
-            main
+            main,
         });
     }
 
