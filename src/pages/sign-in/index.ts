@@ -1,9 +1,9 @@
 import Block from "../../utils/Block";
 import template from "../../layouts/auth/auth.template.hbs";
 
-import LoginFooter from "../../components/LoginFooter/LoginFooter";
-import LoginHeader from "../../components/LoginHeader/LoginHeader";
-import LoginMain from "../../components/LoginMain/LoginMain";
+import SignInFooter from "../../components/SignInFooter/SignInFooter";
+import SignInHeader from "../../components/SignInHeader/SignInHeader";
+import SignInMain from "../../components/SignInMain/SignInMain";
 
 import AuthController from "../../controllers/AuthController";
 import type { SignInData } from "../../api/AuthAPI";
@@ -14,20 +14,20 @@ class SignInPage extends Block {
             const inputs = main.getContent().querySelectorAll("input");
             const data = Array.from(inputs).reduce((acc, input) => {
                 acc[input.name as keyof SignInData] = input.value;
-                if (input.value == "") {
+                if (input.value === "") {
                     return { login: null, password: null };
-                } else
+                }
                 return acc;
             }, {} as Partial<SignInData>);
 
             AuthController.signIn(data as SignInData);
         };
 
-        const main = new LoginMain({ title: "Авторизация" });
-        const header = new LoginHeader({
+        const main = new SignInMain({ title: "Авторизация" });
+        const header = new SignInHeader({
             onSubmit: handleSubmit,
         });
-        const footer = new LoginFooter();
+        const footer = new SignInFooter();
 
         super({
             header,

@@ -31,16 +31,16 @@ class Validator {
     password(value: string): boolean {
         const result =
             /[A-Za-z0-9]{8,40}/.test(value) &&
-                /[A-Z]/.test(value) &&
-                /[0-9]/.test(value);
+            /[A-Z]/.test(value) &&
+            /[0-9]/.test(value);
 
-        return result
+        return result;
     }
 
     phone(value: string): boolean {
         const result = /\+?[0-9]{10,15}/.test(value);
 
-        return result
+        return result;
     }
 
     validate(type: ValidationType, value: string): boolean {

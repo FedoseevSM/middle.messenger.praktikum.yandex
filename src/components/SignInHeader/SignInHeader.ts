@@ -1,11 +1,12 @@
 import Block from "../../utils/Block";
-import template from "./LoginHeader.template.hbs";
+import template from "./SignInHeader.template.hbs";
 
 import { Button } from "../Button/Button";
 import { Errors } from "../Errors/Errors";
-import { FetchStatus, withStore, StoreData } from "../../utils/Store";
+import type { StoreData } from "../../utils/Store";
+import { FetchStatus, withStore } from "../../utils/Store";
 
-interface LoginHeaderProps {
+interface SignInHeaderProps {
     onSubmit: (e: SubmitEvent) => void;
     loginErrors?: string;
     loginStatus?: FetchStatus;
@@ -16,8 +17,8 @@ const mapStateToProps = ({ loginStatus, loginErrors }: StoreData) => ({
     loginErrors,
 });
 
-class LoginHeader extends Block {
-    constructor({ onSubmit, ...props }: LoginHeaderProps) {
+class SignInHeader extends Block {
+    constructor({ onSubmit, ...props }: SignInHeaderProps) {
         const button = new Button({
             text: "Войти",
             events: {
@@ -45,4 +46,4 @@ class LoginHeader extends Block {
     }
 }
 
-export default withStore(mapStateToProps)(LoginHeader);
+export default withStore(mapStateToProps)(SignInHeader);

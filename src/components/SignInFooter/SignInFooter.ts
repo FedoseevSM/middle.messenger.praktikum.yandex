@@ -1,9 +1,9 @@
 import Block from "../../utils/Block";
-import template from "./LoginFooter.template.hbs";
+import template from "./SignInFooter.template.hbs";
 
 import { Link } from "../Link/Link";
 
-class LoginFooter extends Block {
+class SignInFooter extends Block {
     constructor() {
         const link = new Link({
             children: "Регистрация",
@@ -20,4 +20,4 @@ class LoginFooter extends Block {
     }
 }
 
-export default LoginFooter;
+export default SignInFooter;

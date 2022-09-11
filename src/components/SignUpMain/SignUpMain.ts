@@ -1,13 +1,13 @@
 import { LabelInput } from "../LabelInput/LabelInput";
 import Block from "../../utils/Block";
 import { ValidationType } from "../../utils/Validator";
-import template from "./RegisterMain.template.hbs";
+import template from "./SignUpMain.template.hbs";
 
-interface RegisterMainProps {
+interface SignUpMainProps {
     title: string;
 }
-class RegisterMain extends Block {
-    constructor({ title }: RegisterMainProps) {
+class SignUpMain extends Block {
+    constructor({ title }: SignUpMainProps) {
         const firstNameInput = new LabelInput({
             labelClassName: "auth-label",
             labelText: "Имя",
@@ -15,7 +15,7 @@ class RegisterMain extends Block {
             type: "text",
             className: "auth-input",
             validationType: ValidationType.Name,
-            message: "Допустимы символы латиницы и кириллицы, а также дефис"
+            message: "Допустимы символы латиницы и кириллицы, а также дефис",
         });
 
         const secondNameInput = new LabelInput({
@@ -25,7 +25,7 @@ class RegisterMain extends Block {
             type: "text",
             className: "auth-input",
             validationType: ValidationType.Name,
-            message: "Допустимы символы латиницы и кириллицы, а также дефис"
+            message: "Допустимы символы латиницы и кириллицы, а также дефис",
         });
 
         const loginInput = new LabelInput({
@@ -35,7 +35,8 @@ class RegisterMain extends Block {
             type: "text",
             className: "auth-input",
             validationType: ValidationType.Login,
-            message: "Логин должен состояить из латинских букв и цифр, также допустимы символы _ и -"
+            message:
+                "Логин должен состояить из латинских букв и цифр, также допустимы символы _ и -",
         });
 
         const passwordInput = new LabelInput({
@@ -45,7 +46,8 @@ class RegisterMain extends Block {
             type: "password",
             className: "auth-input",
             validationType: ValidationType.Password,
-            message: "Пароль должен содержать одну заглавную букву и одну цифру"
+            message:
+                "Пароль должен содержать одну заглавную букву и одну цифру",
         });
 
         const emailInput = new LabelInput({
@@ -55,7 +57,7 @@ class RegisterMain extends Block {
             type: "email",
             className: "auth-input",
             validationType: ValidationType.Email,
-            message: "Некорректный адрес почты"
+            message: "Некорректный адрес почты",
         });
 
         const phoneInput = new LabelInput({
@@ -65,7 +67,7 @@ class RegisterMain extends Block {
             type: "phone",
             className: "auth-input",
             validationType: ValidationType.Phone,
-            message: "Некорректный номер телефона"
+            message: "Некорректный номер телефона",
         });
 
         super({
@@ -84,4 +86,4 @@ class RegisterMain extends Block {
     }
 }
 
-export default RegisterMain;
+export default SignUpMain;

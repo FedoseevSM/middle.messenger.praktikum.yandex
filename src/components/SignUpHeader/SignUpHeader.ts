@@ -1,11 +1,12 @@
 import Block from "../../utils/Block";
-import template from "./RegisterHeader.template.hbs";
+import template from "./SignUpHeader.template.hbs";
 
 import { Button } from "../Button/Button";
 import { Errors } from "../Errors/Errors";
-import { FetchStatus, withStore, StoreData } from "../../utils/Store";
+import type { StoreData } from "../../utils/Store";
+import { FetchStatus, withStore } from "../../utils/Store";
 
-interface RegisterHeaderProps {
+interface SignUpHeaderProps {
     onSubmit: (e: SubmitEvent) => void;
     registerErrors?: string;
     registerStatus?: FetchStatus;
@@ -16,8 +17,8 @@ const mapStateToProps = ({ registerStatus, registerErrors }: StoreData) => ({
     registerErrors,
 });
 
-class RegisterHeader extends Block {
-    constructor({ onSubmit, ...props }: RegisterHeaderProps) {
+class SignUpHeader extends Block {
+    constructor({ onSubmit, ...props }: SignUpHeaderProps) {
         const button = new Button({
             text: "Зарегистрироваться",
             events: {
@@ -45,4 +46,4 @@ class RegisterHeader extends Block {
     }
 }
 
-export default withStore(mapStateToProps)(RegisterHeader);
+export default withStore(mapStateToProps)(SignUpHeader);

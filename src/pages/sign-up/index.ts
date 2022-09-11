@@ -1,8 +1,8 @@
 import Block from "../../utils/Block";
 import template from "../../layouts/auth/auth.template.hbs";
 
-import RegisterHeader from "../../components/RegisterHeader/RegisterHeader";
-import RegisterMain from "../../components/RegisterMain/RegisterMain";
+import SignUpHeader from "../../components/SignUpHeader/SignUpHeader";
+import SignUpMain from "../../components/SignUpMain/SignUpMain";
 
 import AuthController from "../../controllers/AuthController";
 import type { SignUpData } from "../../api/AuthAPI";
@@ -13,7 +13,7 @@ class SignUpPage extends Block {
             const inputs = main.getContent().querySelectorAll("input");
             const data = Array.from(inputs).reduce((acc, input) => {
                 acc[input.name as keyof SignUpData] = input.value;
-                if (input.value == "") {
+                if (input.value === "") {
                     return {
                         first_name: "null",
                         second_name: "null",
@@ -29,8 +29,8 @@ class SignUpPage extends Block {
             AuthController.signUp(data as SignUpData);
         };
 
-        const main = new RegisterMain({ title: "Регистрация" });
-        const header = new RegisterHeader({
+        const main = new SignUpMain({ title: "Регистрация" });
+        const header = new SignUpHeader({
             onSubmit: handleSubmit,
         });
 

@@ -26,10 +26,7 @@ export class LabelInput extends Block {
             ...inputProps,
             onBlur: (event) => {
                 const { value } = event.target as HTMLInputElement;
-                const isValid = Validator.validate(
-                    validationType,
-                    value
-                );
+                const isValid = Validator.validate(validationType, value);
 
                 errors.setProps({ text: message, isValid });
             },
