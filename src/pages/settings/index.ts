@@ -1,5 +1,5 @@
 import Block from "../../utils/Block";
-import template from "./account.template.hbs";
+import template from "./settings.template.hbs";
 
 import { Button } from "../../components/Button/Button";
 import { Link } from "../../components/Link/Link";
@@ -11,7 +11,7 @@ const props = {
     description: "404",
 };
 
-class AccountPage extends Block {
+class SettingsPage extends Block {
     constructor() {
         const handleSubmit = () => {
             AuthController.logout();
@@ -24,7 +24,7 @@ class AccountPage extends Block {
         });
         const link = new Link({
             children: "<-",
-            href: "/messages",
+            href: "/messenger",
             className: "back-btn",
         });
         super({
@@ -38,4 +38,4 @@ class AccountPage extends Block {
     }
 }
 
-export default AccountPage;
+export default SettingsPage;

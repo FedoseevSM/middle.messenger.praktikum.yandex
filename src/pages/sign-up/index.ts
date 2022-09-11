@@ -7,7 +7,7 @@ import RegisterMain from "../../components/RegisterMain/RegisterMain";
 import AuthController from "../../controllers/AuthController";
 import type { SignUpData } from "../../api/AuthAPI";
 
-class RegisterPage extends Block {
+class SignUpPage extends Block {
     constructor() {
         const handleSubmit = () => {
             const inputs = main.getContent().querySelectorAll("input");
@@ -45,4 +45,4 @@ class RegisterPage extends Block {
     }
 }
 
-export default RegisterPage;
+export default SignUpPage;

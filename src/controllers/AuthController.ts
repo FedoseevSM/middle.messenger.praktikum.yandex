@@ -26,7 +26,7 @@ class AuthController {
 
         try {
             await this.fetchUser();
-            this.router.go("/messages");
+            this.router.go("/messenger");
         } catch (err) {}
     }
 
@@ -34,7 +34,7 @@ class AuthController {
         store.set("loginStatus", FetchStatus.Loading);
         try {
             await this.api.singIn(data);
-            this.router.go("/messages");
+            this.router.go("/messenger");
             store.set("loginStatus", FetchStatus.Fullfilled);
         } catch (err) {
             store.set("loginStatus", FetchStatus.Rejected);

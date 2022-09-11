@@ -8,7 +8,7 @@ import LoginMain from "../../components/LoginMain/LoginMain";
 import AuthController from "../../controllers/AuthController";
 import type { SignInData } from "../../api/AuthAPI";
 
-class LoginPage extends Block {
+class SignInPage extends Block {
     constructor() {
         const handleSubmit = () => {
             const inputs = main.getContent().querySelectorAll("input");
@@ -41,4 +41,4 @@ class LoginPage extends Block {
     }
 }
 
-export default LoginPage;
+export default SignInPage;

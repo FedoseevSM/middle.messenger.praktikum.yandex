@@ -1,15 +1,15 @@
 import Block from "../../utils/Block";
-import template from "./messages.template.hbs";
+import template from "./messenger.template.hbs";
 
 const props = {
     title: "Сообщения",
     description: "404",
 };
 
-class MessagesPage extends Block {
+class MessengerPage extends Block {
     render() {
         return this.compile(template, props);
     }
 }
 
-export default MessagesPage;
+export default MessengerPage;

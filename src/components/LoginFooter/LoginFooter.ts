@@ -7,7 +7,7 @@ class LoginFooter extends Block {
     constructor() {
         const link = new Link({
             children: "Регистрация",
-            href: "/register",
+            href: "/sign-up",
             className: "auth-link",
         });
         super({
