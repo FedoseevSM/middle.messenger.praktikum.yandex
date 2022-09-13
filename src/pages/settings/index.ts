@@ -1,41 +1,52 @@
 import Block from "../../utils/Block";
 import template from "./settings.template.hbs";
 
-import { Button } from "../../components/Button/Button";
+import SettingsHeader from "../../components/SettingsHeader/SettingsHeader";
+import SettingsMain from "../../components/SettingsMain/SettingsMain";
+import SettingsFooter from "../../components/SettingsFooter/SettingsFooter";
+
 import { Link } from "../../components/Link/Link";
 
+import type { StoreData } from "../../utils/Store";
+import { withStore } from "../../utils/Store";
 import AuthController from "../../controllers/AuthController";
 
-const props = {
-    title: "Профиль",
-    description: "404",
-};
+const mapStateToProps = ({ currentUser }: StoreData) => ({
+    currentUser
+});
 
 class SettingsPage extends Block {
     constructor() {
-        const handleSubmit = () => {
-            AuthController.logout();
-        };
-        const logout = new Button({
-            text: "Выйти",
-            events: {
-                click: handleSubmit,
-            },
-        });
+        AuthController.getUser();
         const link = new Link({
             children: "<-",
             href: "/messenger",
             className: "back-btn",
         });
+        const header = new SettingsHeader();
+        const main = new SettingsMain();
+        const footer = new SettingsFooter();
         super({
-            logout,
             link,
+            header,
+            main,
+            footer
         });
     }
 
     render() {
-        return this.compile(template, props);
+        if (this.props.currentUser) {
+        this.children.main.setProps({
+            login: this.props.currentUser.login,
+            firstName: this.props.currentUser.first_name,
+            secondName: this.props.currentUser.second_name,
+            displayName: this.props.currentUser.display_name,
+            email: this.props.currentUser.email,
+            phone: this.props.currentUser.phone,
+        });
+        }
+        return this.compile(template, this.props);
     }
 }
 
-export default SettingsPage;
+export default withStore(mapStateToProps)(SettingsPage);

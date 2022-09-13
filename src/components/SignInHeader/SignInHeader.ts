@@ -21,6 +21,7 @@ class SignInHeader extends Block {
     constructor({ onSubmit, ...props }: SignInHeaderProps) {
         const button = new Button({
             text: "Войти",
+            className: "auth-btn",
             events: {
                 click: onSubmit,
             },

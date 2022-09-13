@@ -27,7 +27,7 @@ export enum FetchStatus {
     Rejected = "rejected",
 }
 
-interface User {
+export interface User {
     id: number;
     first_name: string;
     second_name: string;
@@ -43,7 +43,7 @@ export interface ApiError {
 }
 
 export interface StoreData {
-    currentUser?: User;
+    currentUser?: User | null;
     loginStatus: FetchStatus;
     loginErrors: ApiError | null;
     registerStatus: FetchStatus;
@@ -56,6 +56,7 @@ export class Store extends EventBus {
         loginErrors: null,
         registerStatus: FetchStatus.Idle,
         registerErrors: null,
+        currentUser: null,
     };
 
     public getState() {

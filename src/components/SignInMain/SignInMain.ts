@@ -6,6 +6,7 @@ import template from "./SignInMain.template.hbs";
 interface SignInMainProps {
     title: string;
 }
+
 class SignInMain extends Block {
     constructor({ title }: SignInMainProps) {
         const loginInput = new LabelInput({

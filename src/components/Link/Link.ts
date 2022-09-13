@@ -7,6 +7,7 @@ interface LinkProps {
     href: string;
     children: string;
     className?: string;
+    events: Object;
 }
 
 export class Link extends Block {

@@ -33,15 +33,23 @@
 }
 .user__inner {
   width: 25em;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
 }
-.user__header,
-.user__footer {
+.user__header {
   display: flex;
   justify-content: center;
+}
+.user__main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 .user__name {
   display: block;
   font-weight: 600;
+  text-align: center;
 }
 
 // Params
@@ -52,4 +60,24 @@
 .params__item {
   display: flex;
   justify-content: space-between;
+}
+
+// List
+.settings__list {
+  list-style: none;
+}
+.settings__list-item {
+  border-bottom: 1px solid #eaeaea;
+  padding: 8px 0;
+  &:last-child {
+    border: 0;
+  }
+}
+.settings-link {
+  color: #3369f3;
+  align-self: flex-start;
+}
+.logout-link {
+  color: #ff1010;
+  align-self: flex-start;
 }

@@ -25,7 +25,7 @@ class AuthController {
         }
 
         try {
-            await this.fetchUser();
+            await this.getUser();
             this.router.go("/messenger");
         } catch (err) {}
     }
@@ -49,7 +49,7 @@ class AuthController {
         } catch (err) {}
     }
 
-    async fetchUser() {
+    async getUser() {
         try {
             const user = await this.api.read();
             store.set("currentUser", user);
