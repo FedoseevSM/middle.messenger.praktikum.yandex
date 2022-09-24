@@ -4,6 +4,7 @@ export enum ValidationType {
     Login = "login",
     Password = "password",
     Phone = "phone",
+    Any = "any"
 }
 
 class Validator {
@@ -43,6 +44,10 @@ class Validator {
         return result;
     }
 
+    any(value: string): boolean {
+        return typeof(value) == "string"
+    }
+
     validate(type: ValidationType, value: string): boolean {
         switch (type) {
             case ValidationType.Email:
@@ -55,6 +60,8 @@ class Validator {
                 return this.password(value);
             case ValidationType.Phone:
                 return this.phone(value);
+            case ValidationType.Any:
+                return this.any(value);
             default: {
                 const exhaustiveCheck: never = type;
                 throw new Error(

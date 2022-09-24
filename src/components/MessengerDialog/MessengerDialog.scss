@@ -1,0 +1,19 @@
+.dialog-content {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  max-height: calc(100% - 72px);
+  padding: 50px 100px;
+  background-color: $darkBlue;
+}
+.dialog__send {
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+}
+.dialog__input {
+  padding: 0 20px;
+  width: 100%;
+}

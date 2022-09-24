@@ -7,8 +7,21 @@ import SignUpMain from "../../components/SignUpMain/SignUpMain";
 import AuthController from "../../controllers/AuthController";
 import type { SignUpData } from "../../api/AuthAPI";
 
+import type { StoreData } from "../../utils/Store";
+import { withStore } from "../../utils/Store";
+import Router from "../../utils/Router";
+
+import type { SignInData } from "../../api/AuthAPI";
+
+const mapStateToProps = ({
+    currentUser
+}: StoreData) => ({
+    currentUser
+});
+
 class SignUpPage extends Block {
     constructor() {
+        AuthController.getUser();
         const handleSubmit = () => {
             const inputs = main.getContent().querySelectorAll("input");
             const data = Array.from(inputs).reduce((acc, input) => {
@@ -41,8 +54,15 @@ class SignUpPage extends Block {
     }
 
     render() {
+        const renderView = () => {
+            if (this.props.currentUser) {
+                const router = new Router("#app");
+                return router.go("/messenger");
+            }
+        };
+        setTimeout(renderView, 0);
         return this.compile(template, this.props);
     }
 }
 
-export default SignUpPage;
+export default withStore(mapStateToProps)(SignUpPage);

@@ -12,17 +12,19 @@ class ChatsController {
         this.router = new Router("#app");
     }
 
-    async getChat() {
+    async getChats() {
         try {
-            await this.api.getChat();
+            let chats = await this.api.getChats();
+            store.set("chatsList", chats)
         } catch (error) {
             return;
         }
     }
 
     async createChat(data: CreateChatData) {
+        const response: any = await this.api.createChat(data);
         try {
-            await this.api.createChat(data);
+            store.set("currentChatId", response.id)
         } catch (error) {
             return;
         }

@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     router
         .use("/", SignInPage)
+        .use("/sign-in", SignInPage)
         .use("/sign-up", SignUpPage)
         .use("/settings", SettingsPage)
         .use("/messenger", MessengerPage)

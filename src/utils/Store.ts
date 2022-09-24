@@ -44,10 +44,15 @@ export interface ApiError {
 
 export interface StoreData {
     currentUser?: User | null;
-    loginStatus: FetchStatus;
-    loginErrors: ApiError | null;
-    registerStatus: FetchStatus;
-    registerErrors: ApiError | null;
+    loginStatus?: FetchStatus;
+    loginErrors?: ApiError | null;
+    registerStatus?: FetchStatus;
+    registerErrors?: ApiError | null;
+    changeDataView?: boolean;
+    changePasswordView?: boolean;
+    chatsList?: Array<[]>;
+    currentChat?: object;
+    currentChatId?: number;
 }
 
 export class Store extends EventBus {
@@ -57,6 +62,11 @@ export class Store extends EventBus {
         registerStatus: FetchStatus.Idle,
         registerErrors: null,
         currentUser: null,
+        changeDataView: false,
+        changePasswordView: false,
+        chatsList: [],
+        currentChat: {},
+        currentChatId: 0,
     };
 
     public getState() {
@@ -66,6 +76,7 @@ export class Store extends EventBus {
     public set(path: _ResourcePath<StoreData>, value: unknown) {
         set(this.state, path, value);
 
+        this.on(StoreEvents.Updated, () => {});
         this.emit(StoreEvents.Updated);
     }
 }

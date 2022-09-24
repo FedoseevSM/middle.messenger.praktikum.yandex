@@ -1,4 +1,6 @@
 import BaseAPI from "./BaseAPI";
+import store, { FetchStatus } from "../utils/Store";
+import Router from "../utils/Router";
 
 export interface CreateChatData {
     title: string;
@@ -23,7 +25,7 @@ export default class ChatsAPI extends BaseAPI {
     }
 
     // Get chat
-    getChat(): Promise<unknown> {
+    getChats(): Promise<unknown> {
         return this.http.get("/");
     }
 

@@ -10,6 +10,10 @@
 @import "../pages/messenger/messenger";
 @import "../pages/settings/settings";
 
+// Components
+@import "../components/Modal/Modal";
+@import "../components/MessengerDialog/MessengerDialog";
+
 // Style
 body {
   font-family: "Segoe UI", sans-serif;

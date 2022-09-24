@@ -1,52 +1,71 @@
 import Block from "../../utils/Block";
+
 import template from "./SettingsFooter.template.hbs";
+import templateChangeData from "./ChangeDataFooter.template.hbs";
+import templateChangePassword from "./ChangePasswordFooter.template.hbs";
 
 import { Button } from "../../components/Button/Button";
-import { Link } from "../../components/Link/Link";
-
-import AuthController from "../../controllers/AuthController";
 
 class SettingsFooter extends Block {
-    constructor() {
-        const handleSubmit = () => {
-            AuthController.logout();
-        };
+    constructor({
+        handleChangeData,
+        handleChangePassword,
+        handleSavePassword,
+        handleSaveData,
+        handleLogout,
+    }: any) {
         const logout = new Button({
             text: "Выйти",
             className: "logout-link",
             events: {
-                click: handleSubmit,
+                click: handleLogout,
             },
         });
-        const changeData = new Link({
-            children: "Изменить данные",
-            href: "/settings",
+        const changeData = new Button({
+            text: "Изменить данные",
             className: "settings-link",
             events: {
-                click: {
-                    handleSubmit
-                },
+                click: handleChangeData,
             },
         });
-        const changePassword = new Link({
-            children: "Изменить пароль",
-            href: "/settings",
+        const changePassword = new Button({
+            text: "Изменить пароль",
             className: "settings-link",
             events: {
-                click: {
-                    handleSubmit
-                },
+                click: handleChangePassword,
+            },
+        });
+        const saveData = new Button({
+            text: "Сохранить",
+            className: "save-btn",
+            events: {
+                click: handleSaveData,
+            },
+        });
+        const savePassword = new Button({
+            text: "Сохранить",
+            className: "save-btn",
+            events: {
+                click: handleSavePassword,
             },
         });
         super({
             logout,
             changeData,
-            changePassword
+            changePassword,
+            saveData,
+            savePassword
         });
     }
 
     render() {
-        return this.compile(template, this.props);
+        if (this.props.changeDataView) {
+            return this.compile(templateChangeData, this.props);
+        } else if (this.props.changePasswordView) {
+            return this.compile(templateChangePassword, this.props);
+        } else {
+            return this.compile(template, this.props);
+        }
     }
 }
 

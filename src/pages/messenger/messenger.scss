@@ -16,12 +16,16 @@
   flex-direction: column;
 }
 .message {
+  cursor: pointer;
   display: flex;
   gap: 20px;
   padding: 10px;
   &:hover {
     background-color: #f5f5f5;
   }
+}
+.message.active {
+  background-color: #f5f5f5;
 }
 .message__user {
   display: flex;
@@ -58,6 +62,13 @@
   display: flex;
   gap: 20px;
   align-items: center;
+}
+.dialog__welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: column;
 }
 
 // Components

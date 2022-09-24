@@ -11,6 +11,7 @@ export interface LabelInputProps extends InputProps {
     labelText: string;
     validationType: ValidationType;
     message: string;
+    value?: string;
 }
 
 export class LabelInput extends Block {
@@ -36,7 +37,7 @@ export class LabelInput extends Block {
             input,
             labelClassName,
             labelText,
-            errors,
+            errors
         });
     }
 
