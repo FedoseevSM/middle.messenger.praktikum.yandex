@@ -70,12 +70,6 @@ class MessengerSidebar extends Block {
         this.children.chats.setProps({
             chats: this.props.chatsList,
         });
-            // if (this.props.chatsList && this.props.currentChatId) {
-            //     const list = this.props.chatsList
-            //     const id = this.props.currentChatId
-            //     console.log(list.find(chat => chat.id == id))
-            // }
-
         return this.compile(template, this.props);
     }
 }

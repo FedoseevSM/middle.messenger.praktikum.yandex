@@ -44,4 +44,8 @@ export default class ChatsAPI extends BaseAPI {
         return this.http.put("/users", data);
     }
 
+    getToken(data: string): Promise<unknown> {
+        return this.http.post(`/token/${data}`);
+    }
+
 }

@@ -1,4 +1,8 @@
-import type { CreateChatData, DeleteChatData, UsersData } from "../api/ChatsAPI";
+import type {
+    CreateChatData,
+    DeleteChatData,
+    UsersData,
+} from "../api/ChatsAPI";
 import ChatsAPI from "../api/ChatsAPI";
 import store, { FetchStatus } from "../utils/Store";
 import Router from "../utils/Router";
@@ -15,7 +19,7 @@ class ChatsController {
     async getChats() {
         try {
             let chats = await this.api.getChats();
-            store.set("chatsList", chats)
+            store.set("chatsList", chats);
         } catch (error) {
             return;
         }
@@ -24,7 +28,7 @@ class ChatsController {
     async createChat(data: CreateChatData) {
         const response: any = await this.api.createChat(data);
         try {
-            store.set("currentChatId", response.id)
+            store.set("currentChatId", response.id);
         } catch (error) {
             return;
         }
@@ -46,6 +50,15 @@ class ChatsController {
         }
     }
 
+    async getToken() {
+        const chatId: any = store.getState().currentChatId;
+        const response: any = await this.api.getToken(chatId);
+        try {
+            localStorage.setItem('token', response.token);
+        } catch (error) {
+            return;
+        }
+    }
 }
 
 export default new ChatsController();

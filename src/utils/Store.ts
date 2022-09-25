@@ -51,6 +51,7 @@ export interface StoreData {
     changeDataView?: boolean;
     changePasswordView?: boolean;
     chatsList?: Array<[]>;
+    messagesList?: Array<[]>;
     currentChat?: object;
     currentChatId?: number;
 }
@@ -67,6 +68,7 @@ export class Store extends EventBus {
         chatsList: [],
         currentChat: {},
         currentChatId: 0,
+        messagesList: []
     };
 
     public getState() {
