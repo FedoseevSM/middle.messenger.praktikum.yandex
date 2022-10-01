@@ -6,7 +6,7 @@ import SignInHeader from "../../components/SignInHeader/SignInHeader";
 import SignInMain from "../../components/SignInMain/SignInMain";
 
 import type { StoreData } from "../../utils/Store";
-import { withStore } from "../../utils/Store";
+import store, { withStore } from "../../utils/Store";
 import Router from "../../utils/Router";
 
 import AuthController from "../../controllers/AuthController";

@@ -2,6 +2,7 @@ import type { SignInData, SignUpData } from "../api/AuthAPI";
 import AuthAPI from "../api/AuthAPI";
 import store, { FetchStatus } from "../utils/Store";
 import Router from "../utils/Router";
+import type { User } from "../utils/Store";
 
 class AuthController {
     private api: AuthAPI;
@@ -32,8 +33,8 @@ class AuthController {
 
     async signIn(data: SignInData) {
         store.set("loginStatus", FetchStatus.Loading);
+        await this.api.singIn(data);
         try {
-            await this.api.singIn(data);
             this.router.go("/messenger");
             store.set("loginStatus", FetchStatus.Fullfilled);
         } catch (err) {
@@ -43,16 +44,18 @@ class AuthController {
     }
 
     async logout() {
+        await this.api.logout();
         try {
-            await this.api.logout();
             this.router.go("/");
         } catch (err) {}
     }
 
     async getUser() {
+        const user = await this.api.read() as User;
         try {
-            const user = await this.api.read();
             store.set("currentUser", user);
+            const id = String(user.id)
+            return localStorage.setItem("id", id)
         } catch (err) {
             throw err
         }

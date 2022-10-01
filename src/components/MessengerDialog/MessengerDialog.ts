@@ -9,6 +9,7 @@ import Messages from "../Messages/Messages";
 import MessagesController from "../../controllers/MessagesController";
 
 import { withStore, StoreData } from "../../utils/Store";
+import AuthController from "../../controllers/AuthController";
 
 const mapStateToProps = ({
     messagesList,
@@ -26,6 +27,7 @@ interface dataModal {
 
 class MessengerDialog extends Block {
     constructor() {
+        AuthController.getUser()
         const handleSend = async () => {
             const data = document.querySelector(".auth-input-test") as dataModal;
             await MessagesController.sendMessage(data.value as string);

@@ -60,7 +60,7 @@ class ChatsController {
 
     async getToken(chatId: string) {
         try {
-            const response: any = await this.api.getToken(chatId) as GetTokenResponse;
+            const response = await this.api.getToken(chatId) as GetTokenResponse;
             store.set("currentToken", response.token as GetTokenResponse);
         } catch (error) {
             return;
