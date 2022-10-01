@@ -64,9 +64,18 @@
 
     npm run lint
 
+**Проверка кода через ESLint с автоматическими исправлениями:**
+
+    npm run lint-fix
+
+**Запуск юнит-тестов:**
+
+    npm test
+
 ## Дополнительные ссылки
 
 **Netlify:**
 https://steady-sorbet-ecaff6.netlify.app
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/84a2682d-cc93-40b4-b997-038d616cceb5/deploy-status)](https://app.netlify.com/sites/steady-sorbet-ecaff6/deploys)
 Для синхронизации с Netlify задействована ветка deploy
