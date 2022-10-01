@@ -18,10 +18,6 @@ class MessagesController {
     private _ping: any;
 
     constructor() {
-        this._handleOpen = this._handleOpen.bind(this);
-        this._handleMessage = this._handleMessage.bind(this);
-        this._handleError = this._handleError.bind(this);
-        this._handleClose = this._handleClose.bind(this);
     }
 
     private _addEvents() {
@@ -38,7 +34,7 @@ class MessagesController {
         this._ws.removeEventListener("close", this._handleClose);
     }
 
-    private _handleOpen() {
+    private _handleOpen = () => {
         console.log("Соединение установлено");
         this.getMessages({ offset: 0 });
         this._ping = setInterval(() => {
@@ -46,7 +42,7 @@ class MessagesController {
         }, 1000);
     }
 
-    private _handleMessage(evt: MessageEvent) {
+    private _handleMessage = (evt: MessageEvent) => {
         const data = JSON.parse(evt.data);
         if (Array.isArray(data)) {
             store.set("messagesList", data.reverse());
@@ -56,11 +52,11 @@ class MessagesController {
         }
     }
 
-    private _handleError(evt: ErrorEvent) {
+    private _handleError = (evt: ErrorEvent) => {
         console.log("Ошибка подключения", evt.message);
     }
 
-    private _handleClose(evt: CloseEventInit) {
+    private _handleClose = (evt: CloseEventInit) => {
         this._removeEvents();
         if (evt.wasClean) {
             console.log("Соединение закрыто");
