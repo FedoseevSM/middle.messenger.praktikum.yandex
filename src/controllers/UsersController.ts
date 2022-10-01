@@ -22,7 +22,7 @@ class UsersController {
 
     async user(data: UserData) {
         try {
-            await this.api.user(data);
+            await this.api.changeUser(data);
         } catch (error) {
             return;
         }

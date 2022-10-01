@@ -38,11 +38,11 @@ export class Modal extends Block {
                 document.body.addEventListener(
                     "keyup",
                     function (e) {
-                        const key = e.keyCode;
+                        const key = e.code;
                         const modalActive: any =
                             document.querySelector(".modal.active");
                         const overlay: any = document.querySelector(".overlay");
-                        if (key == 27) {
+                        if (key == 'Escape') {
                             modalActive.classList.remove("active");
                             overlay.classList.remove("active");
                         }

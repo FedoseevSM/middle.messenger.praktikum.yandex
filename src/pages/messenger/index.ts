@@ -5,52 +5,86 @@ import MessengerSidebar from "../../components/MessengerSidebar/MessengerSidebar
 import MessengerDialog from "../../components/MessengerDialog/MessengerDialog";
 
 import type { StoreData } from "../../utils/Store";
-import { FetchStatus, withStore } from "../../utils/Store";
-import store from "../../utils/Store";
+import { withStore } from "../../utils/Store";
 
-import ChatsAPI from "../../api/ChatsAPI";
-
-import AuthController from "../../controllers/AuthController";
 import ChatsController from "../../controllers/ChatsController";
 import MessagesController from "../../controllers/MessagesController";
 
-const mapStateToProps = ({ chatsList, currentChatId }: StoreData) => ({
+interface ChatsListResponse {
+    id?: number;
+}
+
+const mapStateToProps = ({
+    chatsList,
     currentChatId,
-    chatsList
+    currentToken,
+}: StoreData) => ({
+    currentChatId,
+    chatsList,
+    currentToken,
 });
 
 class MessengerPage extends Block {
     constructor() {
-        const qwe = () => AuthController.getUser()
-        setTimeout(qwe, 1000);
         const sidebar = new MessengerSidebar({});
-        const dialog = new MessengerDialog();
+        const dialog = new MessengerDialog({});
         super({
             sidebar,
             dialog,
         });
     }
 
-    render() {
-        function requestMessages() {
-            MessagesController.connect({
-              userId: Number(localStorage.getItem('id')),
-              chatId: Number(store.getState().currentChatId),
-              token: localStorage.getItem('token'),
-            });
-          }
+    async componentDidMount() {
+        const { currentChatId } = this.props;
 
-        if (this.props.currentChatId) {
-            ChatsController.getToken()
-            .then(() => {
-                requestMessages()
-            })
-            const list: any = store.getState().chatsList;
-            const id = this.props.currentChatId;
-            const chat = list.find((chat: any) => chat.id == id);
+        if (!currentChatId) {
+            return;
+        }
+
+        await ChatsController.getToken(currentChatId);
+    }
+
+    handleFetchToken(currentChatId: string) {
+        if (!currentChatId) {
+            return;
+        }
+
+        ChatsController.getToken(currentChatId);
+    }
+
+    openSocket(token: string, chatId: number) {
+        MessagesController.leave();
+        MessagesController.connect({
+            userId: Number(localStorage.getItem("id")),
+            chatId: chatId,
+            token: token,
+        });
+    }
+
+    componentDidUpdate(prevProps: any, nextProps: any) {
+        const { currentChatId: prevCurrentChatId, currentToken: prevToken } =
+            prevProps;
+        const { currentChatId: nextCurrentChatId, currentToken: nextToken } =
+            nextProps;
+
+        if (prevCurrentChatId != nextCurrentChatId) {
+            this.handleFetchToken(nextCurrentChatId);
+        }
+
+        if (prevToken != nextToken) {
+            this.openSocket(nextToken, nextCurrentChatId);
+        }
+    }
+
+    render() {
+        const { currentChatId, chatsList } = this.props;
+        if (currentChatId) {
+            const chat = chatsList.find(
+                (chat: ChatsListResponse) => chat.id == currentChatId
+            );
             this.children.dialog.setProps({
                 title: chat.title,
-                chat: true
+                chat: true,
             });
         }
         return this.compile(template, this.props);

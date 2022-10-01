@@ -21,11 +21,8 @@ describe("Store", () => {
         );
     });
 
-    it("Set User", () => {
+        it("Set and check equal User value in Store", () => {
         store!.set("currentUser", user);
-    });
-
-    it("Check equal User value in Store", () => {
         assert.equal(
             store!.getState().currentUser,
             user,

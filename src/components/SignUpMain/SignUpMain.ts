@@ -57,7 +57,7 @@ class SignUpMain extends Block {
             type: "email",
             className: "auth-input",
             validationType: ValidationType.Email,
-            message: "Некорректный адрес почты",
+            message: "Недействительный адрес электронной почты",
         });
 
         const phoneInput = new LabelInput({
@@ -67,7 +67,7 @@ class SignUpMain extends Block {
             type: "phone",
             className: "auth-input",
             validationType: ValidationType.Phone,
-            message: "Некорректный номер телефона",
+            message: "Номер телефона должен содержать от 10 до 15 символов",
         });
 
         super({

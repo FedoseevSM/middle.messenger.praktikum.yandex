@@ -27,17 +27,14 @@ export default class UsersAPI extends BaseAPI {
         super("/user");
     }
 
-    // Search for user by login (max 10)
     findUser(data: FindUserData): Promise<unknown> {
         return this.http.post("/search", data);
     }
 
-    // Change user profile
-    user(data: UserData): Promise<unknown> {
+    changeUser(data: UserData): Promise<unknown> {
         return this.http.put("/profile", data);
     }
 
-    // Change user password
     changePassword(data: ChangePasswordData): Promise<unknown> {
         return this.http.put("/password", data);
     }

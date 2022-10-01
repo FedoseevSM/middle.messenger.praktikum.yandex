@@ -43,15 +43,16 @@ class MessagesController {
         this.getMessages({ offset: 0 });
         this._ping = setInterval(() => {
             this._ws.send("");
-        }, 10000);
+        }, 1000);
     }
 
     private _handleMessage(evt: MessageEvent) {
         const data = JSON.parse(evt.data);
-        console.log(data)
         if (Array.isArray(data)) {
-            const list = () => store.set("messagesList", data);
-            setTimeout(list, 5000)
+            store.set("messagesList", data.reverse());
+        } else if (data.type !== "error") {
+            const messagesList = store.getState().messagesList || [];
+            store.set("messagesList", messagesList.concat([data]));
         }
     }
 
@@ -100,12 +101,17 @@ class MessagesController {
     }
 
     public leave() {
-        clearInterval(this._ping);
+        if (this._ping) {
+            clearInterval(this._ping);
+        }
+        if (!this._ws) {
+            return;
+        }
         this._ws.close();
         this._removeEvents();
     }
 
-    public sendMessage(message: any) {
+    public sendMessage(message: string) {
         this._ws.send(
             JSON.stringify({
                 content: message,

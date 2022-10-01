@@ -15,6 +15,7 @@ class Block {
     protected props: any;
     public children: Record<string, Block>;
     private eventBus: () => EventBus;
+    private mounted: boolean = false;
 
     setProps = (nextProps: any) => {
         if (!nextProps) {
@@ -48,7 +49,9 @@ class Block {
     }
 
     componentDidMount() {}
-    componentDidUpdate(oldProps: any, newProps: any) {
+    componentDidUpdate(oldProps: any, newProps: any) {}
+
+    shouldComponentUpdate(oldProps: any, newProps: any) {
         return true;
     }
 
@@ -56,10 +59,6 @@ class Block {
     protected init() {}
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-
-        Object.values(this.children).forEach((child) =>
-            child.dispatchComponentDidMount()
-        );
     }
 
     get element() {
@@ -113,10 +112,15 @@ class Block {
         this.onDestroy();
     }
 
-    _componentDidUpdate(oldProps: any, newProps: any) {
-        if (this.componentDidUpdate(oldProps, newProps)) {
+    _shouldComponentUpdate(oldProps: any, newProps: any) {
+        if (this.shouldComponentUpdate(oldProps, newProps)) {
             this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
+    }
+
+    _componentDidUpdate(oldProps: any, newProps: any) {
+        this.componentDidUpdate(oldProps, newProps);
+        this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
 
     _getChildrenAndProps(childrenAndProps: any) {
@@ -185,7 +189,6 @@ class Block {
     private _render() {
         const fragment = this.render();
 
-        this._removeEvents();
         const newElement = fragment.firstElementChild!;
 
         if (this._element) {
@@ -195,6 +198,10 @@ class Block {
 
         this._element = newElement as HTMLElement;
         this._addEvents();
+        if (!this.mounted) {
+            this.mounted = true;
+            this.dispatchComponentDidMount();
+        }
     }
 
     _makePropsProxy(props: any) {

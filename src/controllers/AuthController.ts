@@ -50,11 +50,12 @@ class AuthController {
     }
 
     async getUser() {
-        const user: any = await this.api.read();
         try {
-            localStorage.setItem('id', user.id);
+            const user = await this.api.read();
             store.set("currentUser", user);
-        } catch (err) {}
+        } catch (err) {
+            throw err
+        }
     }
 }
 

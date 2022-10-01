@@ -50,10 +50,11 @@ export interface StoreData {
     registerErrors?: ApiError | null;
     changeDataView?: boolean;
     changePasswordView?: boolean;
-    chatsList?: Array<[]>;
-    messagesList?: Array<[]>;
+    chatsList?: Array<{}>;
+    messagesList?: Array<{}>;
     currentChat?: object;
-    currentChatId?: number;
+    currentChatId: null | number;
+    currentToken: null | number;
 }
 
 export class Store extends EventBus {
@@ -67,8 +68,9 @@ export class Store extends EventBus {
         changePasswordView: false,
         chatsList: [],
         currentChat: {},
-        currentChatId: 0,
-        messagesList: []
+        currentChatId: null,
+        messagesList: [],
+        currentToken: null,
     };
 
     public getState() {
@@ -77,7 +79,6 @@ export class Store extends EventBus {
 
     public set(path: _ResourcePath<StoreData>, value: unknown) {
         set(this.state, path, value);
-
         this.on(StoreEvents.Updated, () => {});
         this.emit(StoreEvents.Updated);
     }

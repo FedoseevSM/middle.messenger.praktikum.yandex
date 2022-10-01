@@ -6,6 +6,14 @@ import templateChangePassword from "./ChangePasswordFooter.template.hbs";
 
 import { Button } from "../../components/Button/Button";
 
+interface SettingsFooterProps {
+    handleChangeData: void;
+    handleChangePassword: void;
+    handleSavePassword: void;
+    handleSaveData: void;
+    handleLogout: void;
+}
+
 class SettingsFooter extends Block {
     constructor({
         handleChangeData,
@@ -13,7 +21,7 @@ class SettingsFooter extends Block {
         handleSavePassword,
         handleSaveData,
         handleLogout,
-    }: any) {
+    }: SettingsFooterProps) {
         const logout = new Button({
             text: "Выйти",
             className: "logout-link",
@@ -54,18 +62,18 @@ class SettingsFooter extends Block {
             changeData,
             changePassword,
             saveData,
-            savePassword
+            savePassword,
         });
     }
 
     render() {
         if (this.props.changeDataView) {
             return this.compile(templateChangeData, this.props);
-        } else if (this.props.changePasswordView) {
-            return this.compile(templateChangePassword, this.props);
-        } else {
-            return this.compile(template, this.props);
         }
+        if (this.props.changePasswordView) {
+            return this.compile(templateChangePassword, this.props);
+        }
+        return this.compile(template, this.props);
     }
 }
 

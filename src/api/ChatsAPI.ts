@@ -1,6 +1,4 @@
 import BaseAPI from "./BaseAPI";
-import store, { FetchStatus } from "../utils/Store";
-import Router from "../utils/Router";
 
 export interface CreateChatData {
     title: string;
@@ -24,23 +22,19 @@ export default class ChatsAPI extends BaseAPI {
         super("/chats");
     }
 
-    // Get chat
     getChats(): Promise<unknown> {
         return this.http.get("/");
     }
 
-    // Create chat
     createChat(data: CreateChatData): Promise<unknown> {
         return this.http.post("/", data);
     }
 
-    // Delete chat by ID
     deleteChat(data: DeleteChatData): Promise<unknown> {
         return this.http.delete("/", data);
     }
 
-    // Add users to chat
-    users(data: UsersData): Promise<unknown> {
+    addUsers(data: UsersData): Promise<unknown> {
         return this.http.put("/users", data);
     }
 

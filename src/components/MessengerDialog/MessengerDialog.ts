@@ -8,44 +8,52 @@ import Messages from "../Messages/Messages";
 
 import MessagesController from "../../controllers/MessagesController";
 
-import { FetchStatus, withStore } from "../../utils/Store";
-import { StoreData } from "../../utils/Store";
-import store from "../../utils/Store";
+import { withStore, StoreData } from "../../utils/Store";
 
-const mapStateToProps = ({ messagesList }: StoreData) => ({
-    messagesList
+const mapStateToProps = ({
+    messagesList,
+    currentChatId,
+    currentToken,
+}: StoreData) => ({
+    messagesList,
+    currentChatId,
+    currentToken,
 });
+
+interface dataModal {
+    value?: string;
+}
 
 class MessengerDialog extends Block {
     constructor() {
         const handleSend = async () => {
-            const data: any = document.querySelector(".auth-input-test");
-            await MessagesController.sendMessage(data.value);
+            const data = document.querySelector(".auth-input-test") as dataModal;
+            await MessagesController.sendMessage(data.value as string);
         };
         const input = new Input({
             className: "auth-input-test",
             name: "send",
             type: "text",
-            value: "Сообщение"
+            placeholder: "Сообщение",
         });
         const btn = new Button({
             text: "Отправить",
             className: "auth-btn",
             events: {
-                click: handleSend
-            }
+                click: handleSend,
+            },
         });
-        const messages = new Messages()
+        const messages = new Messages();
         super({
             input,
             btn,
-            messages
+            messages,
         });
     }
 
     render() {
         this.children.messages.setProps({
-            messages: this.props.messagesList
+            messages: this.props.messagesList,
         });
         return this.compile(template, this.props);
     }

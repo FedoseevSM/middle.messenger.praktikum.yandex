@@ -77,11 +77,11 @@ class SettingsPage extends Block {
         const header = new SettingsHeader();
         const main = new SettingsMain();
         const footer = new SettingsFooter({
-            handleChangeData: handleChangeData,
-            handleChangePassword: handleChangePassword,
-            handleSavePassword: handleSavePassword,
-            handleSaveData: handleSaveData,
-            handleLogout: handleLogout,
+            handleChangeData,
+            handleChangePassword,
+            handleSavePassword,
+            handleSaveData,
+            handleLogout,
         });
         super({
             link,

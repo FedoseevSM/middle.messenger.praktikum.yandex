@@ -3,10 +3,7 @@ import template from "./SettingsHeader.template.hbs";
 
 class SettingsHeader extends Block {
     constructor() {
-
-        super({
-            
-        });
+        super();
     }
 
     render() {
