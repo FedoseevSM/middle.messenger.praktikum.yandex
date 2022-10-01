@@ -16,6 +16,7 @@
      "src/**/*.ts",
      "src/**/*.js",
      "dist/*",
-     "node_modules/**/*"
+     "node_modules/**/*",
+     "env.ts"
   ]
 }

@@ -1,5 +1,7 @@
 import store from "../utils/Store";
 
+import env from "../../env"
+
 export interface IMessageWebSocketConnect {
     userId: number;
     chatId: number;
@@ -82,7 +84,7 @@ class MessagesController {
         this._chatId = options.chatId;
         this._token = options.token;
         this._ws = new WebSocket(
-            `wss://ya-praktikum.tech/ws/chats/${options.userId}/${options.chatId}/${options.token}`
+            `${env.HOST_WS}/chats/${options.userId}/${options.chatId}/${options.token}`
         );
         this._addEvents();
     }
