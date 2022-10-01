@@ -92,29 +92,33 @@ class SettingsPage extends Block {
         });
     }
 
-    render() {
-        const renderView = () => {
-            if (this.props.currentUser) {
+    componentDidMount() {
+        AuthController.getUser()
+            .then(() => {
                 this.children.main.setProps({
-                    login: this.props.currentUser.login,
-                    firstName: this.props.currentUser.first_name,
-                    secondName: this.props.currentUser.second_name,
-                    displayName: this.props.currentUser.display_name,
-                    email: this.props.currentUser.email,
-                    phone: this.props.currentUser.phone,
-                    changeDataView: this.props.changeDataView,
-                    changePasswordView: this.props.changePasswordView,
+                    login: store.getState().currentUser!.login,
+                    firstName: store.getState().currentUser!.first_name,
+                    secondName: store.getState().currentUser!.second_name,
+                    displayName: store.getState().currentUser!.display_name,
+                    email: store.getState().currentUser!.email,
+                    phone: store.getState().currentUser!.phone,
                 });
-                this.children.footer.setProps({
-                    changeDataView: this.props.changeDataView,
-                    changePasswordView: this.props.changePasswordView,
-                });
-            } else {
+            })
+            .catch((err) => {
                 const router = new Router("#app");
                 return router.go("/");
-            }
-        };
-        setTimeout(renderView, 2000);
+            });
+    }
+
+    render() {
+        this.children.main.setProps({
+            changeDataView: this.props.changeDataView,
+            changePasswordView: this.props.changePasswordView,
+        });
+        this.children.footer.setProps({
+            changeDataView: this.props.changeDataView,
+            changePasswordView: this.props.changePasswordView,
+        });
         return this.compile(template, this.props);
     }
 }

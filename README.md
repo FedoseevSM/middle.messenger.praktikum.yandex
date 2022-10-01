@@ -58,7 +58,7 @@
 
 **Проверка стилей через stylelint:**
 
-    npm run lint-sass
+    npm run lint:sass
 
 **Проверка кода через ESLint:**
 
@@ -66,7 +66,7 @@
 
 **Проверка кода через ESLint с автоматическими исправлениями:**
 
-    npm run lint-fix
+    npm run lint:fix
 
 **Запуск юнит-тестов:**
 

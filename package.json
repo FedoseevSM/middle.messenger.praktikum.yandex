@@ -7,9 +7,9 @@
     "dev": "parcel src/pages/index.html --no-cache --no-source-maps",
     "build": "parcel build src/pages/index.html --no-cache --no-source-maps --no-optimize --no-scope-hoist",
     "reset": "rimraf dist .parcel-cache",
-    "lint-sass": "stylelint src/styles/*.scss",
+    "lint:sass": "stylelint src/styles/*.scss",
     "lint": "eslint",
-    "lint-fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix",
     "test": "mocha --require ts-node/register src/**/*.spec.ts"
   },
   "repository": {

@@ -7,11 +7,11 @@ import templateChangePassword from "./ChangePasswordFooter.template.hbs";
 import { Button } from "../../components/Button/Button";
 
 interface SettingsFooterProps {
-    handleChangeData: void;
-    handleChangePassword: void;
-    handleSavePassword: void;
-    handleSaveData: void;
-    handleLogout: void;
+    handleChangeData: Function;
+    handleChangePassword: Function;
+    handleSavePassword: Function;
+    handleSaveData: Function;
+    handleLogout: Function;
 }
 
 class SettingsFooter extends Block {

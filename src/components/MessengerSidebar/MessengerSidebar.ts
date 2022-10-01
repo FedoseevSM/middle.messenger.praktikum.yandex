@@ -1,3 +1,4 @@
+import { Link } from './../Link/Link';
 import Block from "../../utils/Block";
 import template from "./MessengerSidebar.template.hbs";
 
@@ -44,11 +45,16 @@ class MessengerSidebar extends Block {
             currentChatId: null,
             currentToken: null,
         });
+        const settings = new Link({
+            href: "/settings",
+            children: "Профиль",
+        })
 
         super({
             modal,
             chats,
             btn,
+            settings
         });
     }
 
