@@ -8,9 +8,8 @@ import { Button } from "../Button/Button";
 
 import { Chats } from "../Chats/Chats";
 
-import { CreateChatData } from "../../api/ChatsAPI";
 import type { StoreData } from "../../utils/Store";
-import { withStore } from "../../utils/Store";
+import store, { withStore } from "../../utils/Store";
 
 import ChatsController from "../../controllers/ChatsController";
 
@@ -18,10 +17,6 @@ const mapStateToProps = ({ chatsList, currentChatId }: StoreData) => ({
     chatsList,
     currentChatId,
 });
-
-interface HandleSubmitData {
-    value?: string;
-}
 
 class MessengerSidebar extends Block {
     constructor() {
@@ -58,21 +53,21 @@ class MessengerSidebar extends Block {
         });
     }
 
-    componentDidMount(): void {
-        ChatsController.getChats();
+    componentDidMount() {
+        ChatsController.getChats()
     }
 
     render() {
         const handleSubmit = async () => {
-            const data = document.querySelector(".auth-input") as HandleSubmitData;
+            const data = document.querySelector(".auth-input") as HTMLInputElement;
             await ChatsController.createChat({
                 title: data.value,
-            } as CreateChatData);
+            });
             ChatsController.getChats();
-            const modal = document.querySelector(".modal.active")!;
-            const overlay = document.querySelector(".overlay")!;
-            modal.classList.remove("active");
-            overlay.classList.remove("active");
+            const modal = document.querySelector(".modal.active");
+            const overlay = document.querySelector(".overlay");
+            modal?.classList.remove("active");
+            overlay?.classList.remove("active");
         };
         this.children.btn.setProps({
             events: {
@@ -80,7 +75,7 @@ class MessengerSidebar extends Block {
             },
         });
         this.children.chats.setProps({
-            chats: this.props.chatsList,
+            chats: store.getState().chatsList,
             currentChatId: this.props.currentChatId,
         });
         return this.compile(template, this.props);

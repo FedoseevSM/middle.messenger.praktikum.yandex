@@ -21,16 +21,12 @@ const mapStateToProps = ({
     currentToken,
 });
 
-interface dataModal {
-    value?: string;
-}
-
 class MessengerDialog extends Block {
     constructor() {
         AuthController.getUser()
         const handleSend = async () => {
-            const data = document.querySelector(".auth-input-test") as dataModal;
-            await MessagesController.sendMessage(data.value as string);
+            const data = document.querySelector(".auth-input-test") as HTMLInputElement;
+            await MessagesController.sendMessage(data.value);
         };
         const input = new Input({
             className: "auth-input-test",

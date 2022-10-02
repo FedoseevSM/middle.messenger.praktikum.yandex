@@ -96,15 +96,15 @@ class SettingsPage extends Block {
         AuthController.getUser()
             .then(() => {
                 this.children.main.setProps({
-                    login: store.getState().currentUser!.login,
-                    firstName: store.getState().currentUser!.first_name,
-                    secondName: store.getState().currentUser!.second_name,
-                    displayName: store.getState().currentUser!.display_name,
-                    email: store.getState().currentUser!.email,
-                    phone: store.getState().currentUser!.phone,
+                    login: store.getState().currentUser?.login,
+                    firstName: store.getState().currentUser?.first_name,
+                    secondName: store.getState().currentUser?.second_name,
+                    displayName: store.getState().currentUser?.display_name,
+                    email: store.getState().currentUser?.email,
+                    phone: store.getState().currentUser?.phone,
                 });
             })
-            .catch((err) => {
+            .catch(() => {
                 const router = new Router("#app");
                 return router.go("/");
             });

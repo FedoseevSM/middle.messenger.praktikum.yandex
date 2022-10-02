@@ -5,13 +5,14 @@ import MessengerSidebar from "../../components/MessengerSidebar/MessengerSidebar
 import MessengerDialog from "../../components/MessengerDialog/MessengerDialog";
 
 import type { StoreData } from "../../utils/Store";
-import { withStore } from "../../utils/Store";
+import store, { withStore } from "../../utils/Store";
 
 import ChatsController from "../../controllers/ChatsController";
 import MessagesController from "../../controllers/MessagesController";
 
 interface ChatsListResponse {
     id?: number;
+    title?: string;
 }
 
 const mapStateToProps = ({
@@ -35,6 +36,7 @@ class MessengerPage extends Block {
     }
 
     async componentDidMount() {
+        ChatsController.getChats();
         const { currentChatId } = this.props;
 
         if (!currentChatId) {
@@ -62,10 +64,16 @@ class MessengerPage extends Block {
     }
 
     componentDidUpdate(prevProps: any, nextProps: any) {
-        const { currentChatId: prevCurrentChatId, currentToken: prevToken } =
-            prevProps;
-        const { currentChatId: nextCurrentChatId, currentToken: nextToken } =
-            nextProps;
+        const {
+            currentChatId: prevCurrentChatId,
+            currentToken: prevToken,
+            chatsList: prevchatsList,
+        } = prevProps;
+        const {
+            currentChatId: nextCurrentChatId,
+            currentToken: nextToken,
+            chatsList: nextchatsList,
+        } = nextProps;
 
         if (prevCurrentChatId != nextCurrentChatId) {
             this.handleFetchToken(nextCurrentChatId);
@@ -74,19 +82,22 @@ class MessengerPage extends Block {
         if (prevToken != nextToken) {
             this.openSocket(nextToken, nextCurrentChatId);
         }
-    }
-
-    render() {
-        const { currentChatId, chatsList } = this.props;
-        if (currentChatId) {
-            const chat = chatsList.find(
-                (chat: ChatsListResponse) => chat.id == currentChatId
-            );
+        if (!store.getState().currentChatId) {
+            return;
+        } else {
+            let chatsList = store.getState().chatsList;
+            const chat = chatsList?.find(
+                (chat: ChatsListResponse) =>
+                    chat.id == store.getState().currentChatId
+            ) as ChatsListResponse;
             this.children.dialog.setProps({
                 title: chat.title,
                 chat: true,
             });
         }
+    }
+
+    render() {
         return this.compile(template, this.props);
     }
 }

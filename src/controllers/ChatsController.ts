@@ -29,13 +29,13 @@ class ChatsController {
             let chats = await this.api.getChats();
             store.set("chatsList", chats);
         } catch (error) {
-            return;
+            throw error;
         }
     }
 
     async createChat(data: CreateChatData) {
-        const response = await this.api.createChat(data) as CreateChatResponse;
         try {
+            const response = await this.api.createChat(data) as CreateChatResponse;
             store.set("currentChatId", response.id as CreateChatResponse);
         } catch (error) {
             return;
