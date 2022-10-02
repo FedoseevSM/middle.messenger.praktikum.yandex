@@ -3,6 +3,7 @@ import AuthAPI from "../api/AuthAPI";
 import store, { FetchStatus } from "../utils/Store";
 import Router from "../utils/Router";
 import type { User } from "../utils/Store";
+import MessagesController from "./MessagesController";
 
 class AuthController {
     private api: AuthAPI;
@@ -45,6 +46,8 @@ class AuthController {
 
     async logout() {
         try {
+            MessagesController.leave();
+            store.reset();
             await this.api.logout();
             this.router.go("/");
         } catch (err) {}
@@ -52,12 +55,10 @@ class AuthController {
 
     async getUser() {
         try {
-            const user = await this.api.read() as User;
+            const user = (await this.api.read()) as User;
             store.set("currentUser", user);
-            const id = String(user.id)
-            return localStorage.setItem("id", id)
         } catch (err) {
-            throw err
+            throw err;
         }
     }
 }

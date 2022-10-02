@@ -1,4 +1,4 @@
-import { Link } from './../Link/Link';
+import { Link } from "./../Link/Link";
 import Block from "../../utils/Block";
 import template from "./MessengerSidebar.template.hbs";
 
@@ -19,12 +19,12 @@ const mapStateToProps = ({ chatsList, currentChatId }: StoreData) => ({
 });
 
 class MessengerSidebar extends Block {
-    constructor() {
+    constructor(props = {}) {
         const input = new Input({
             name: "password",
             type: "text",
             className: "auth-input",
-            placeholder: "Название"
+            placeholder: "Название",
         });
         const btn = new Button({
             text: "Отправить",
@@ -43,27 +43,28 @@ class MessengerSidebar extends Block {
         const settings = new Link({
             href: "/settings",
             children: "Профиль",
-        })
+        });
 
         super({
             modal,
             chats,
             btn,
-            settings
+            settings,
+            ...props,
         });
     }
 
     componentDidMount() {
-        ChatsController.getChats()
     }
 
     render() {
         const handleSubmit = async () => {
-            const data = document.querySelector(".auth-input") as HTMLInputElement;
+            const data = document.querySelector(
+                ".auth-input"
+            ) as HTMLInputElement;
             await ChatsController.createChat({
                 title: data.value,
             });
-            ChatsController.getChats();
             const modal = document.querySelector(".modal.active");
             const overlay = document.querySelector(".overlay");
             modal?.classList.remove("active");
@@ -75,12 +76,12 @@ class MessengerSidebar extends Block {
             },
         });
         this.children.chats.setProps({
-            chats: store.getState().chatsList,
+            chats: this.props.chatsList,
             currentChatId: this.props.currentChatId,
         });
+
         return this.compile(template, this.props);
     }
 }
 
 export default withStore(mapStateToProps)(MessengerSidebar);
-

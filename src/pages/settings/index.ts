@@ -29,9 +29,7 @@ const mapStateToProps = ({
 });
 
 class SettingsPage extends Block {
-    constructor() {
-        const router = new Router("#app");
-        AuthController.getUser();
+    constructor(props = {}) {
         const link = new Link({
             children: "<-",
             href: "/messenger",
@@ -88,29 +86,29 @@ class SettingsPage extends Block {
             header,
             main,
             footer,
-            router,
+            ...props,
         });
     }
 
     componentDidMount() {
-        AuthController.getUser()
-            .then(() => {
-                this.children.main.setProps({
-                    login: store.getState().currentUser?.login,
-                    firstName: store.getState().currentUser?.first_name,
-                    secondName: store.getState().currentUser?.second_name,
-                    displayName: store.getState().currentUser?.display_name,
-                    email: store.getState().currentUser?.email,
-                    phone: store.getState().currentUser?.phone,
-                });
-            })
-            .catch(() => {
-                const router = new Router("#app");
-                return router.go("/");
-            });
+        const { currentUser } = this.props;
+
+        if (currentUser) {
+            return;
+        }
+
+        AuthController.getUser().catch(() => new Router("#app").go("/"));
     }
 
     render() {
+        const {
+            login,
+            first_name: firstName,
+            second_name: secondName,
+            display_name: displayName,
+            email,
+            phone,
+        } = this.props.currentUser || {};
         this.children.main.setProps({
             changeDataView: this.props.changeDataView,
             changePasswordView: this.props.changePasswordView,
@@ -118,6 +116,14 @@ class SettingsPage extends Block {
         this.children.footer.setProps({
             changeDataView: this.props.changeDataView,
             changePasswordView: this.props.changePasswordView,
+        });
+        this.children.main.setProps({
+            login,
+            firstName,
+            secondName,
+            displayName,
+            email,
+            phone,
         });
         return this.compile(template, this.props);
     }

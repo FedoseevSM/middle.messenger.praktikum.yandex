@@ -3,17 +3,10 @@ import type {
     DeleteChatData,
     UsersData,
 } from "../api/ChatsAPI";
+
 import ChatsAPI from "../api/ChatsAPI";
 import store from "../utils/Store";
 import Router from "../utils/Router";
-
-interface CreateChatResponse {
-    id?: number;
-}
-
-interface GetTokenResponse {
-    token?: string;
-}
 
 class ChatsController {
     private api: ChatsAPI;
@@ -27,7 +20,10 @@ class ChatsController {
     async getChats() {
         try {
             let chats = await this.api.getChats();
-            store.set("chatsList", chats);
+            if (chats == 0) {
+                return;
+            }
+            return store.set("chatsList", chats);
         } catch (error) {
             throw error;
         }
@@ -35,8 +31,9 @@ class ChatsController {
 
     async createChat(data: CreateChatData) {
         try {
-            const response = await this.api.createChat(data) as CreateChatResponse;
-            store.set("currentChatId", response.id as CreateChatResponse);
+            const response = await this.api.createChat(data);
+            await this.getChats();
+            store.set("currentChatId", response.id);
         } catch (error) {
             return;
         }
@@ -60,8 +57,8 @@ class ChatsController {
 
     async getToken(chatId: string) {
         try {
-            const response = await this.api.getToken(chatId) as GetTokenResponse;
-            store.set("currentToken", response.token as GetTokenResponse);
+            const response = await this.api.getToken(chatId);
+            store.set("currentToken", response.token);
         } catch (error) {
             return;
         }

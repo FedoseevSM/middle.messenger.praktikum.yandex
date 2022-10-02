@@ -22,10 +22,11 @@ const mapStateToProps = ({
 });
 
 class MessengerDialog extends Block {
-    constructor() {
-        AuthController.getUser()
+    constructor(props = {}) {
         const handleSend = async () => {
-            const data = document.querySelector(".auth-input-test") as HTMLInputElement;
+            const data = document.querySelector(
+                ".auth-input-test"
+            ) as HTMLInputElement;
             await MessagesController.sendMessage(data.value);
         };
         const input = new Input({
@@ -46,6 +47,7 @@ class MessengerDialog extends Block {
             input,
             btn,
             messages,
+            ...props,
         });
     }
 

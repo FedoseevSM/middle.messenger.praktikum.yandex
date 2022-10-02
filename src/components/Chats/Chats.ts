@@ -1,7 +1,8 @@
 import Block from "../../utils/Block";
 import template from "./Chats.template.hbs";
 
-import store, {StoreData} from "../../utils/Store";
+import store, { StoreData } from "../../utils/Store";
+import ChatsController from "../../controllers/ChatsController";
 
 export class Chats extends Block {
     constructor(props: StoreData) {

@@ -4,13 +4,21 @@ export interface CreateChatData {
     title: string;
 }
 
+interface CreateChatResponse {
+    id: number;
+}
+
 export interface DeleteChatData {
     chatId: number;
 }
 
 export interface UsersData {
-    users: number [];
+    users: number[];
     chatId: number;
+}
+
+interface GetTokenResponse {
+    token: string;
 }
 
 export default class ChatsAPI extends BaseAPI {
@@ -26,7 +34,7 @@ export default class ChatsAPI extends BaseAPI {
         return this.http.get("/");
     }
 
-    createChat(data: CreateChatData): Promise<unknown> {
+    createChat(data: CreateChatData): Promise<CreateChatResponse> {
         return this.http.post("/", data);
     }
 
@@ -38,8 +46,7 @@ export default class ChatsAPI extends BaseAPI {
         return this.http.put("/users", data);
     }
 
-    getToken(data: string): Promise<unknown> {
+    getToken(data: string): Promise<GetTokenResponse> {
         return this.http.post(`/token/${data}`);
     }
-
 }

@@ -5,10 +5,12 @@ import MessengerSidebar from "../../components/MessengerSidebar/MessengerSidebar
 import MessengerDialog from "../../components/MessengerDialog/MessengerDialog";
 
 import type { StoreData } from "../../utils/Store";
-import store, { withStore } from "../../utils/Store";
+import { withStore } from "../../utils/Store";
 
 import ChatsController from "../../controllers/ChatsController";
 import MessagesController from "../../controllers/MessagesController";
+import AuthController from "../../controllers/AuthController";
+import Router from "../../utils/Router";
 
 interface ChatsListResponse {
     id?: number;
@@ -19,31 +21,33 @@ const mapStateToProps = ({
     chatsList,
     currentChatId,
     currentToken,
+    currentUser,
 }: StoreData) => ({
     currentChatId,
     chatsList,
     currentToken,
+    userId: currentUser?.id,
 });
 
 class MessengerPage extends Block {
-    constructor() {
+    constructor(props = {}) {
         const sidebar = new MessengerSidebar({});
         const dialog = new MessengerDialog({});
         super({
             sidebar,
             dialog,
+            ...props,
         });
     }
 
-    async componentDidMount() {
-        ChatsController.getChats();
-        const { currentChatId } = this.props;
+    componentDidMount() {
+        const { userId } = this.props;
 
-        if (!currentChatId) {
+        if (userId) {
             return;
         }
 
-        await ChatsController.getToken(currentChatId);
+        AuthController.getUser().catch(() => new Router("#app").go("/"));
     }
 
     handleFetchToken(currentChatId: string) {
@@ -54,25 +58,22 @@ class MessengerPage extends Block {
         ChatsController.getToken(currentChatId);
     }
 
-    openSocket(token: string, chatId: number) {
+    openSocket(token: string, chatId: number, userId: number) {
         MessagesController.leave();
         MessagesController.connect({
-            userId: Number(localStorage.getItem("id")),
-            chatId: chatId,
-            token: token,
+            userId,
+            chatId,
+            token,
         });
     }
 
     componentDidUpdate(prevProps: any, nextProps: any) {
-        const {
-            currentChatId: prevCurrentChatId,
-            currentToken: prevToken,
-            chatsList: prevchatsList,
-        } = prevProps;
+        const { currentChatId: prevCurrentChatId, currentToken: prevToken } =
+            prevProps;
         const {
             currentChatId: nextCurrentChatId,
             currentToken: nextToken,
-            chatsList: nextchatsList,
+            userId,
         } = nextProps;
 
         if (prevCurrentChatId != nextCurrentChatId) {
@@ -80,24 +81,21 @@ class MessengerPage extends Block {
         }
 
         if (prevToken != nextToken) {
-            this.openSocket(nextToken, nextCurrentChatId);
+            this.openSocket(nextToken, nextCurrentChatId, userId);
         }
-        if (!store.getState().currentChatId) {
-            return;
-        } else {
-            let chatsList = store.getState().chatsList;
-            const chat = chatsList?.find(
-                (chat: ChatsListResponse) =>
-                    chat.id == store.getState().currentChatId
-            ) as ChatsListResponse;
+    }
+
+    render() {
+        const { currentChatId, chatsList } = this.props;
+        if (currentChatId) {
+            const chat = chatsList.find(
+                (chat: ChatsListResponse) => chat.id == currentChatId
+            );
             this.children.dialog.setProps({
                 title: chat.title,
                 chat: true,
             });
         }
-    }
-
-    render() {
         return this.compile(template, this.props);
     }
 }
