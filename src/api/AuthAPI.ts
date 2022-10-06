@@ -34,7 +34,7 @@ export default class AuthAPI extends BaseAPI {
         return this.http.post("/logout");
     }
 
-    read(): Promise<unknown> {
+    read() {
         return this.http.get("/user");
     }
 }

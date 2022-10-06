@@ -7,8 +7,10 @@
     "dev": "parcel src/pages/index.html --no-cache --no-source-maps",
     "build": "parcel build src/pages/index.html --no-cache --no-source-maps --no-optimize --no-scope-hoist",
     "reset": "rimraf dist .parcel-cache",
-    "lint-sass": "stylelint src/styles/*.scss",
-    "lint": "eslint . --fix"
+    "lint:sass": "stylelint src/styles/*.scss",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "mocha --require ts-node/register src/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -25,11 +27,15 @@
     "@parcel/resolver-glob": "2.7.0",
     "@parcel/transformer-sass": "2.7.0",
     "@tinkoff/eslint-config": "1.36.1",
+    "@types/chai": "4.3.3",
+    "@types/mocha": "9.1.1",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.36.1",
     "@typescript-eslint/parser": "5.36.1",
+    "chai": "4.3.6",
     "eslint": "8.23.0",
     "handlebars": "4.7.7",
+    "mocha": "10.0.0",
     "nanoid": "4.0.0",
     "parcel": "2.7.0",
     "stylelint": "14.11.0",
@@ -41,7 +47,8 @@
     "express-history-api-fallback": "2.2.1",
     "helmet": "6.0.0",
     "morgan": "1.10.0",
-    "rimraf": "3.0.2"
+    "rimraf": "3.0.2",
+    "ts-node": "10.9.1"
   },
   "targets": {
     "modern": {

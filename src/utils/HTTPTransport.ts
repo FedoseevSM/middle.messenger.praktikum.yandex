@@ -1,3 +1,5 @@
+import env from "../../env"
+
 export enum Method {
     Get = "Get",
     Post = "Post",
@@ -12,7 +14,7 @@ type Options = {
 };
 
 export default class HTTPTransport {
-    static API_URL = "https://ya-praktikum.tech/api/v2";
+    static API_URL = env.HOST_API;
     protected endpoint: string;
 
     constructor(endpoint: string) {
@@ -53,9 +55,10 @@ export default class HTTPTransport {
         });
     }
 
-    public delete<Response>(path: string): Promise<Response> {
+    public delete<Response>(path: string, data: unknown): Promise<Response> {
         return this.request<Response>(this.endpoint + path, {
             method: Method.Delete,
+            data,
         });
     }
 

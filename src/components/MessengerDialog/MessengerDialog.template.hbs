@@ -1,0 +1,38 @@
+<section class="dialog">
+  {{#unless chat}}
+    <div class="dialog__welcome">
+      <h2>Выберите чат</h2>
+      <p>
+        или
+        <a href="#" class="js-open-modal" data-modal="1">создайте новый</a>
+      </p>
+    </div>
+  {{/unless}}
+
+  {{#if chat}}
+    <div class="dialog__navbar">
+      <div class="dialog__profile">
+        <div class="avatar"></div>
+        <p class="message__name">
+          {{{title}}}
+        </p>
+      </div>
+      <div class="dialog__settings">
+        Настройки
+      </div>
+    </div>
+
+    <div class="dialog-content">
+    {{{messages}}}
+    <div class="dialog__send">
+      <div class="dialog__input">
+   {{{input}}}
+    </div>
+    <div>
+    {{{btn}}}
+    </div>
+    </div>
+    </div>
+
+  {{/if}}
+</section>

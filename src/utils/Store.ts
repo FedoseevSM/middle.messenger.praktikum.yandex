@@ -27,7 +27,7 @@ export enum FetchStatus {
     Rejected = "rejected",
 }
 
-interface User {
+export interface User {
     id: number;
     first_name: string;
     second_name: string;
@@ -43,20 +43,37 @@ export interface ApiError {
 }
 
 export interface StoreData {
-    currentUser?: User;
-    loginStatus: FetchStatus;
-    loginErrors: ApiError | null;
-    registerStatus: FetchStatus;
-    registerErrors: ApiError | null;
+    currentUser?: User | null;
+    loginStatus?: FetchStatus;
+    loginErrors?: ApiError | null;
+    registerStatus?: FetchStatus;
+    registerErrors?: ApiError | null;
+    changeDataView?: boolean;
+    changePasswordView?: boolean;
+    chatsList?: Array<{}>;
+    messagesList?: Array<{}>;
+    currentChat?: object;
+    currentChatId: null | number;
+    currentToken: null | number;
+}
+
+const initialState: StoreData = {
+    loginStatus: FetchStatus.Idle,
+    loginErrors: null,
+    registerStatus: FetchStatus.Idle,
+    registerErrors: null,
+    currentUser: null,
+    changeDataView: false,
+    changePasswordView: false,
+    chatsList: [],
+    currentChat: {},
+    currentChatId: null,
+    messagesList: [],
+    currentToken: null,
 }
 
 export class Store extends EventBus {
-    private state: StoreData = {
-        loginStatus: FetchStatus.Idle,
-        loginErrors: null,
-        registerStatus: FetchStatus.Idle,
-        registerErrors: null,
-    };
+    private state = { ...initialState };
 
     public getState() {
         return this.state;
@@ -64,7 +81,12 @@ export class Store extends EventBus {
 
     public set(path: _ResourcePath<StoreData>, value: unknown) {
         set(this.state, path, value);
+        this.on(StoreEvents.Updated, () => {});
+        this.emit(StoreEvents.Updated);
+    }
 
+    public reset() {
+        this.state = initialState;
         this.emit(StoreEvents.Updated);
     }
 }

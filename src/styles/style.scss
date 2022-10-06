@@ -7,8 +7,12 @@
 @import "../layouts/empty/empty";
 
 // Pages
-@import "../pages/messages/messages";
-@import "../pages/account/account";
+@import "../pages/messenger/messenger";
+@import "../pages/settings/settings";
+
+// Components
+@import "../components/Modal/Modal";
+@import "../components/MessengerDialog/MessengerDialog";
 
 // Style
 body {

@@ -14,8 +14,13 @@
 
 ![sprint_2](https://img.shields.io/github/last-commit/samgxlden/middle.messenger.praktikum.yandex/sprint_2?label=%D0%9F%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82&style=for-the-badge)
 
-![cover](https://raw.githubusercontent.com/samgxlden/middle.messenger.praktikum.yandex/sprint_1/ui/blue.png)
+> **Sprint 3**
+>
+> Pull Request: https://github.com/samgxlden/middle.messenger.praktikum.yandex/pull/3
 
+![sprint_3](https://img.shields.io/github/last-commit/samgxlden/middle.messenger.praktikum.yandex/sprint_3?label=%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82&style=for-the-badge)
+
+![cover](https://raw.githubusercontent.com/samgxlden/middle.messenger.praktikum.yandex/sprint_1/ui/blue.png)
 
 ## Установка
 
@@ -53,15 +58,25 @@
 
 **Проверка стилей через stylelint:**
 
-    npm run lint-sass
-    
+    npm run lint:sass
+
 **Проверка кода через ESLint:**
 
     npm run lint
+
+**Проверка кода через ESLint с автоматическими исправлениями:**
+
+    npm run lint:fix
+
+**Запуск юнит-тестов:**
+
+    npm test
 
 ## Дополнительные ссылки
 
 **Netlify:**
 https://steady-sorbet-ecaff6.netlify.app
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/84a2682d-cc93-40b4-b997-038d616cceb5/deploy-status)](https://steady-sorbet-ecaff6.netlify.app)
 
 Для синхронизации с Netlify задействована ветка deploy

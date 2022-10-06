@@ -8,6 +8,7 @@ export interface InputProps {
     onFocus?: (e: FocusEvent) => void;
     onBlur?: (e: FocusEvent) => void;
     onInput?: () => void;
+    placeholder?: string;
 }
 
 export class Input extends Block {

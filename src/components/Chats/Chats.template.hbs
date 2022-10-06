@@ -1,0 +1,25 @@
+<div class="messages__list">
+  {{#each chats}}
+    <div class="message" data-chat={{{this.id}}}>
+      <div class="avatar"></div>
+      <div class="message__user">
+        <div class="message__about">
+          <p class="message__name">
+            {{{this.title}}}
+          </p>
+          <p class="message__text">
+            {{{this.content}}}
+          </p>
+        </div>
+        <div class="message__info">
+          <time class="time">
+            {{{this.time}}}
+          </time>
+          <div class="message-badge">
+            {{{this.unread_count}}}
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>
