@@ -5,7 +5,7 @@ import Router from "../../utils/Router";
 
 interface LinkProps {
     href: string;
-    children: string;
+    children?: string;
     className?: string;
 }
 

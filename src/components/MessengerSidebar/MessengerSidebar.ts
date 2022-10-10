@@ -54,9 +54,6 @@ class MessengerSidebar extends Block {
         });
     }
 
-    componentDidMount() {
-    }
-
     render() {
         const handleSubmit = async () => {
             const data = document.querySelector(

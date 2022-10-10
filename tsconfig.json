@@ -1,4 +1,7 @@
 {
+    "ts-node": {
+        "files": true
+    },
     "compilerOptions": {
         "noImplicitAny": true,
         "noUnusedLocals": false,
@@ -8,6 +11,7 @@
         "target": "es2018",
         "moduleResolution": "node",
         "noImplicitReturns": true,
-        "allowJs": true
+        "allowJs": true,
+        "esModuleInterop": true
     }
 }

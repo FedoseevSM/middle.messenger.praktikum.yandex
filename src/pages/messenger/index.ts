@@ -41,6 +41,7 @@ class MessengerPage extends Block {
     }
 
     componentDidMount() {
+        ChatsController.getChats()
         const { userId } = this.props;
 
         if (userId) {
