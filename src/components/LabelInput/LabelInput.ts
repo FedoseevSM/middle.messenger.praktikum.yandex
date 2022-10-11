@@ -37,7 +37,7 @@ export class LabelInput extends Block {
             input,
             labelClassName,
             labelText,
-            errors
+            errors,
         });
     }
 

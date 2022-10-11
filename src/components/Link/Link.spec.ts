@@ -1,7 +1,7 @@
-import { Link } from "./Link";
 import { expect } from "chai";
-import Router from "../../utils/Router";
 import sinon from "sinon";
+import { Link } from "./Link";
+import Router from "../../utils/Router";
 
 describe("Link", () => {
     it("render", () => {
@@ -12,7 +12,7 @@ describe("Link", () => {
 
     it("element should return <a> tag", () => {
         const link = new Link({ href: "/" });
-        const element = link.element;
+        const { element } = link;
 
         expect(element).to.be.instanceof(window.HTMLAnchorElement);
     });

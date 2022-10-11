@@ -57,23 +57,21 @@ export interface StoreData {
     currentToken: null | number;
 }
 
-const initialState: StoreData = {
-    loginStatus: FetchStatus.Idle,
-    loginErrors: null,
-    registerStatus: FetchStatus.Idle,
-    registerErrors: null,
-    currentUser: null,
-    changeDataView: false,
-    changePasswordView: false,
-    chatsList: [],
-    currentChat: {},
-    currentChatId: null,
-    messagesList: [],
-    currentToken: null,
-}
-
 export class Store extends EventBus {
-    private state = { ...initialState };
+    private state: StoreData = {
+        loginStatus: FetchStatus.Idle,
+        loginErrors: null,
+        registerStatus: FetchStatus.Idle,
+        registerErrors: null,
+        currentUser: null,
+        changeDataView: false,
+        changePasswordView: false,
+        chatsList: [],
+        currentChat: {},
+        currentChatId: null,
+        messagesList: [],
+        currentToken: null,
+    };
 
     public getState() {
         return this.state;
@@ -86,8 +84,9 @@ export class Store extends EventBus {
     }
 
     public reset() {
-        this.state = initialState;
-        this.emit(StoreEvents.Updated);
+        set(this.state, "chatsList", []);
+        set(this.state, "currentChatId", null);
+        set(this.state, "messagesList", []);
     }
 }
 

@@ -6,11 +6,12 @@ import SignInHeader from "../../components/SignInHeader/SignInHeader";
 import SignInMain from "../../components/SignInMain/SignInMain";
 
 import type { StoreData } from "../../utils/Store";
-import { withStore } from "../../utils/Store";
+import store, { withStore } from "../../utils/Store";
 import Router from "../../utils/Router";
 
 import AuthController from "../../controllers/AuthController";
 import type { SignInData } from "../../api/AuthAPI";
+import MessagesController from "../../controllers/MessagesController";
 
 const mapStateToProps = ({ currentUser }: StoreData) => ({
     currentUser,
@@ -49,9 +50,14 @@ class SignInPage extends Block {
     }
 
     componentDidMount() {
-        AuthController.getUser().then(() => {
-            this.router.go("/messenger");
-        });
+        AuthController.getUser()
+            .then(() => {
+                this.router.go("/messenger");
+            })
+            .catch(() => {
+                MessagesController.leave();
+                store.reset();
+            });
     }
 
     render() {

@@ -1,4 +1,4 @@
-import { Link } from "./../Link/Link";
+import { Link } from "../Link/Link";
 import Block from "../../utils/Block";
 import template from "./MessengerSidebar.template.hbs";
 
@@ -12,6 +12,8 @@ import type { StoreData } from "../../utils/Store";
 import store, { withStore } from "../../utils/Store";
 
 import ChatsController from "../../controllers/ChatsController";
+import AuthController from "../../controllers/AuthController";
+import Router from "../../utils/Router";
 
 const mapStateToProps = ({ chatsList, currentChatId }: StoreData) => ({
     chatsList,
@@ -52,6 +54,12 @@ class MessengerSidebar extends Block {
             settings,
             ...props,
         });
+    }
+
+    componentDidMount() {
+        AuthController.getUser()
+            .catch(() => new Router("#app").go("/"))
+            .finally(() => ChatsController.getChats());
     }
 
     render() {

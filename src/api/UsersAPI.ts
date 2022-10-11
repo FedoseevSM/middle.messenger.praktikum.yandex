@@ -38,5 +38,4 @@ export default class UsersAPI extends BaseAPI {
     changePassword(data: ChangePasswordData): Promise<unknown> {
         return this.http.put("/password", data);
     }
-
 }

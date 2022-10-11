@@ -5,10 +5,10 @@ let mode = "development";
 if (process.env.NODE_ENV.trim() === "production") {
     mode = "production";
 }
-console.log(mode + " mode");
+console.log(`${mode} mode`);
 
 module.exports = {
-    mode: mode,
+    mode,
     output: {
         filename: "[name].[contenthash].js",
         assetModuleFilename: "assets/[hash][ext][query]",

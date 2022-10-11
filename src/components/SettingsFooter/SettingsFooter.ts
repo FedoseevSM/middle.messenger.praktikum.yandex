@@ -4,7 +4,7 @@ import template from "./SettingsFooter.template.hbs";
 import templateChangeData from "./ChangeDataFooter.template.hbs";
 import templateChangePassword from "./ChangePasswordFooter.template.hbs";
 
-import { Button } from "../../components/Button/Button";
+import { Button } from "../Button/Button";
 
 interface SettingsFooterProps {
     handleChangeData: Function;

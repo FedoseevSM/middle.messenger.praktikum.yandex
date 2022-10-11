@@ -5,6 +5,7 @@ export class Messages extends Block {
     constructor() {
         super({});
     }
+
     render() {
         return this.compile(template, this.props);
     }

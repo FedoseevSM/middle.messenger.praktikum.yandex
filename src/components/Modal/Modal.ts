@@ -1,6 +1,6 @@
 import Block from "../../utils/Block";
-import { Button } from "../Button/Button";
-import { Input } from "../Input/Input";
+import type { Button } from "../Button/Button";
+import type { Input } from "../Input/Input";
 import template from "./Modal.template.hbs";
 
 interface ModalProps {
@@ -13,22 +13,21 @@ export class Modal extends Block {
     constructor({ title, content, button }: ModalProps) {
         super({ title, content, button });
     }
+
     render() {
         const handleModal = () => {
-            const modalButtons =
-                document.querySelectorAll(".js-open-modal")!;
+            const modalButtons = document.querySelectorAll(".js-open-modal")!;
             const overlay = document.querySelector(".js-overlay-modal")!;
-            const closeButtons =
-                document.querySelectorAll(".js-modal-close")!;
+            const closeButtons = document.querySelectorAll(".js-modal-close")!;
 
             modalButtons.forEach(function (item) {
                 item.addEventListener("click", function (e) {
                     e.preventDefault();
 
-                    const modalId = this.getAttribute("data-modal"),
-                        modalElem = document.querySelector(
-                            '.modal[data-modal="' + modalId + '"]'
-                        )!;
+                    const modalId = this.getAttribute("data-modal");
+                    const modalElem = document.querySelector(
+                        `.modal[data-modal="${modalId}"]`
+                    )!;
 
                     modalElem.classList.add("active");
                     overlay.classList.add("active");
@@ -50,7 +49,7 @@ export class Modal extends Block {
                         const modalActive =
                             document.querySelector(".modal.active")!;
                         const overlay = document.querySelector(".overlay")!;
-                        if (key == 'Escape') {
+                        if (key === "Escape") {
                             modalActive.classList.remove("active");
                             overlay.classList.remove("active");
                         }

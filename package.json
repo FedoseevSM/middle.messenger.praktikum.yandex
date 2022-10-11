@@ -3,15 +3,15 @@
     "version": "1.0.0",
     "description": "---",
     "scripts": {
-        "prepare": "husky",
+        "prepare": "husky install",
         "start": "npm run build && node server.js",
         "dev": "set NODE_ENV=development && webpack serve --history-api-fallback --open",
         "build": "set NODE_ENV=production && webpack",
         "reset": "rimraf dist",
-        "lint:sass": "stylelint src/styles/*.scss",
+        "lint:sass": "stylelint src/styles/*.scss --color",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix --color",
-        "test": "mocha --require ts-node/register --require ./mochaSetup.js 'src/**/*.spec.ts'"
+        "test": "mocha --require ts-node/register --require ./mochaSetup.js 'src/**/*.spec.ts' --color"
     },
     "repository": {
         "type": "git",
@@ -41,7 +41,6 @@
         "html-loader": "4.2.0",
         "html-webpack-plugin": "5.5.0",
         "husky": "8.0.1",
-        "lint-staged": "13.0.3",
         "mini-css-extract-plugin": "2.6.1",
         "mocha": "10.0.0",
         "nanoid": "3.3.4",
@@ -80,19 +79,5 @@
     },
     "engines": {
         "node": ">=12"
-    }
-    ,
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.ts": [
-            "npm run test",
-            "npm run lint:fix",
-            "npm run lint:sass",
-            "git add"
-        ]
     }
 }

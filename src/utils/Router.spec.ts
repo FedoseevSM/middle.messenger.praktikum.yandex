@@ -1,10 +1,9 @@
-import Router from "./Router";
 import { expect } from "chai";
+import Router from "./Router";
 import Block from "./Block";
-import template from "../components/Button/Button.template.hbs"
+import template from "../components/Button/Button.template.hbs";
 
 describe("Router", () => {
-
     class BlockMock extends Block {
         render(): any {
             return this.compile(template, {});

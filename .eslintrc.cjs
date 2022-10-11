@@ -13,7 +13,17 @@ module.exports = {
     "@typescript-eslint/naming-convention": 0,
     "no-param-reassign": 0,
     "@typescript-eslint/no-use-before-define": 0,
-    "prefer-promise-reject-errors": 0
+    "prefer-promise-reject-errors": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "no-console": 0,
+    "no-useless-catch": 0,
+    "no-new": 0,
+    "import/no-named-as-default": 0,
+    "@typescript-eslint/no-shadow": 0,
+    "promise/valid-params": 0,
+    "promise/catch-or-return": 0,
+    "eqeqeq": 0
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
