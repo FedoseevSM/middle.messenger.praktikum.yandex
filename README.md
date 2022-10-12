@@ -20,6 +20,12 @@
 
 ![sprint_3](https://img.shields.io/github/last-commit/samgxlden/middle.messenger.praktikum.yandex/sprint_3?label=%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82&style=for-the-badge)
 
+> **Sprint 4**
+>
+> Pull Request: https://github.com/samgxlden/middle.messenger.praktikum.yandex/pull/4
+
+![sprint_4](https://img.shields.io/github/last-commit/samgxlden/middle.messenger.praktikum.yandex/sprint_4?label=%D0%BF%D0%BE%D1%81%D0%BB%D0%B5%D0%B4%D0%BD%D0%B8%D0%B9%20%D0%BA%D0%BE%D0%BC%D0%BC%D0%B8%D1%82&style=for-the-badge)
+
 ![cover](https://raw.githubusercontent.com/samgxlden/middle.messenger.praktikum.yandex/sprint_1/ui/blue.png)
 
 ## Установка
@@ -30,15 +36,13 @@
 
     npm i
 
-**Запуск сервера Parcel в режиме разработки:**
+**Запуск сервера Webpack в режиме разработки:**
 
     npm run dev
 
-Порт по-умолчанию: 1234
+Порт по-умолчанию: 8080
 
-Чтобы установить желаемый порт, действует команда `PORT=3001 npm run dev`
-
-**Сборка статичных файлов через Parcel:**
+**Сборка статичных файлов через Webpack:**
 
     npm run build
 
@@ -72,6 +76,10 @@
 
     npm test
 
+**Инициализировать рабочую область для precommit:**
+
+    npm run prepare
+
 ## Дополнительные ссылки
 
 **Netlify:**
@@ -79,4 +87,7 @@ https://steady-sorbet-ecaff6.netlify.app
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/84a2682d-cc93-40b4-b997-038d616cceb5/deploy-status)](https://steady-sorbet-ecaff6.netlify.app)
 
-Для синхронизации с Netlify задействована ветка deploy
+**Heroku:**
+https://still-hollows-71710.herokuapp.com
+
+Для синхронизации с Netlify и Heroku задействована ветка deploy
