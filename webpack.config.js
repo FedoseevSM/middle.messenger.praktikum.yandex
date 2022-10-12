@@ -1,20 +1,14 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-let mode = "development";
-if (process.env.NODE_ENV.trim() === "production") {
-    mode = "production";
-}
-console.log(`${mode} mode`);
-
-module.exports = {
-    mode,
+module.exports = ({ development }) => ({
+    mode: development ? "development" : "production",
     output: {
         filename: "[name].[contenthash].js",
         assetModuleFilename: "assets/[hash][ext][query]",
         clean: true,
     },
-    devtool: "source-map",
+    devtool: development ? "source-map" : false,
     entry: {
         index: "./src/pages/index.ts",
     },
@@ -49,9 +43,7 @@ module.exports = {
                 test: /\.(sass|scss|css)$/,
                 exclude: /node_modules/,
                 use: [
-                    mode === "development"
-                        ? "style-loader"
-                        : MiniCssExtractPlugin.loader,
+                    development ? "style-loader" : MiniCssExtractPlugin.loader,
                     "css-loader",
                     {
                         loader: "postcss-loader",
@@ -81,4 +73,4 @@ module.exports = {
             },
         ],
     },
-};
+});
