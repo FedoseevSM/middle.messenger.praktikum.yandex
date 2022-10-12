@@ -3,7 +3,7 @@ name: Deploy
 on: 
   push:
     branches:
-      - sprint_4
+      - deploy
 
 jobs:
   build:
