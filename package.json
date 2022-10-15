@@ -5,8 +5,8 @@
     "scripts": {
         "prepare": "husky install",
         "start": "npm run build && node server.js",
-        "dev": "webpack serve --env development --history-api-fallback --open",
-        "build": "webpack --env production",
+        "dev": "webpack serve --history-api-fallback --open --config webpack.dev.js",
+        "build": "webpack --config webpack.prod.js",
         "reset": "rimraf dist",
         "lint:sass": "stylelint src/styles/*.scss --color",
         "lint": "eslint .",
@@ -57,7 +57,8 @@
         "typescript": "4.8.2",
         "webpack": "5.73.0",
         "webpack-cli": "4.10.0",
-        "webpack-dev-server": "4.11.1"
+        "webpack-dev-server": "4.11.1",
+        "webpack-merge": "5.8.0"
     },
     "dependencies": {
         "express": "4.18.1",
