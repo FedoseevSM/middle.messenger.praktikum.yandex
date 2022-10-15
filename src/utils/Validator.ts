@@ -3,7 +3,7 @@ export enum ValidationType {
     Name = "name",
     Login = "login",
     Password = "password",
-    Phone = "phone"
+    Phone = "phone",
 }
 
 class Validator {

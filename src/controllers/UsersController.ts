@@ -1,4 +1,8 @@
-import type { FindUserData, UserData, ChangePasswordData } from "../api/UsersAPI";
+import type {
+    FindUserData,
+    UserData,
+    ChangePasswordData,
+} from "../api/UsersAPI";
 import UsersAPI from "../api/UsersAPI";
 import store, { FetchStatus } from "../utils/Store";
 import Router from "../utils/Router";
@@ -15,27 +19,20 @@ class UsersController {
     async findUser(data: FindUserData) {
         try {
             await this.api.findUser(data);
-        } catch (error) {
-            return;
-        }
+        } catch (error) {}
     }
 
     async user(data: UserData) {
         try {
             await this.api.changeUser(data);
-        } catch (error) {
-            return;
-        }
+        } catch (error) {}
     }
 
     async changePassword(data: ChangePasswordData) {
         try {
             await this.api.changePassword(data);
-        } catch (error) {
-            return;
-        }
+        } catch (error) {}
     }
-
 }
 
 export default new UsersController();

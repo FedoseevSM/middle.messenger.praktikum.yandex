@@ -13,10 +13,8 @@ import Router from "../../utils/Router";
 
 import type { SignInData } from "../../api/AuthAPI";
 
-const mapStateToProps = ({
-    currentUser
-}: StoreData) => ({
-    currentUser
+const mapStateToProps = ({ currentUser }: StoreData) => ({
+    currentUser,
 });
 
 class SignUpPage extends Block {

@@ -1,3 +1,5 @@
+import "../styles/style.scss";
+
 import Router from "../utils/Router";
 
 import Error404Page from "./404/index";
@@ -6,7 +8,6 @@ import SignInPage from "./sign-in/index";
 import SignUpPage from "./sign-up/index";
 import SettingsPage from "./settings/index";
 import MessengerPage from "./messenger/index";
-// import * as pages from "./**/*.ts"
 
 document.addEventListener("DOMContentLoaded", async () => {
     const router = new Router("#app");

@@ -44,10 +44,25 @@ class MessengerPage extends Block {
         const { userId } = this.props;
 
         if (userId) {
-            return;
+        }
+    }
+
+    componentDidUpdate(prevProps: any, nextProps: any) {
+        const { currentChatId: prevCurrentChatId, currentToken: prevToken } =
+            prevProps;
+        const {
+            currentChatId: nextCurrentChatId,
+            currentToken: nextToken,
+            userId,
+        } = nextProps;
+
+        if (prevCurrentChatId !== nextCurrentChatId) {
+            this.handleFetchToken(nextCurrentChatId);
         }
 
-        AuthController.getUser().catch(() => new Router("#app").go("/"));
+        if (prevToken !== nextToken) {
+            this.openSocket(nextToken, nextCurrentChatId, userId);
+        }
     }
 
     handleFetchToken(currentChatId: string) {
@@ -67,29 +82,11 @@ class MessengerPage extends Block {
         });
     }
 
-    componentDidUpdate(prevProps: any, nextProps: any) {
-        const { currentChatId: prevCurrentChatId, currentToken: prevToken } =
-            prevProps;
-        const {
-            currentChatId: nextCurrentChatId,
-            currentToken: nextToken,
-            userId,
-        } = nextProps;
-
-        if (prevCurrentChatId != nextCurrentChatId) {
-            this.handleFetchToken(nextCurrentChatId);
-        }
-
-        if (prevToken != nextToken) {
-            this.openSocket(nextToken, nextCurrentChatId, userId);
-        }
-    }
-
     render() {
         const { currentChatId, chatsList } = this.props;
-        if (currentChatId) {
+        if (currentChatId && chatsList !== 0) {
             const chat = chatsList.find(
-                (chat: ChatsListResponse) => chat.id == currentChatId
+                (chatItem: ChatsListResponse) => chatItem.id == currentChatId
             );
             this.children.dialog.setProps({
                 title: chat.title,

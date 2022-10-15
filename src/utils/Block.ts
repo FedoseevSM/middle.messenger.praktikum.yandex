@@ -15,7 +15,7 @@ class Block {
     protected props: any;
     public children: Record<string, Block>;
     private eventBus: () => EventBus;
-    private mounted: boolean = false;
+    private mounted = false;
 
     setProps = (nextProps: any) => {
         if (!nextProps) {
@@ -49,11 +49,11 @@ class Block {
     }
 
     componentDidMount() {}
-    componentDidUpdate(oldProps: any, newProps: any) {}
-
     shouldComponentUpdate(oldProps: any, newProps: any) {
         return true;
     }
+
+    componentDidUpdate(oldProps: any, newProps: any) {}
 
     public onDestroy() {}
     protected init() {}
@@ -65,7 +65,7 @@ class Block {
         return this._element;
     }
 
-    protected compile(template: (context: any) => string, context: any) {
+    protected compile(template: any, context: any) {
         const contextAndStubs = { ...context };
 
         Object.entries(this.children).forEach(([name, component]) => {

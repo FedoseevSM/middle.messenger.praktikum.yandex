@@ -8,7 +8,8 @@ import Messages from "../Messages/Messages";
 
 import MessagesController from "../../controllers/MessagesController";
 
-import { withStore, StoreData } from "../../utils/Store";
+import type { StoreData } from "../../utils/Store";
+import { withStore } from "../../utils/Store";
 import AuthController from "../../controllers/AuthController";
 
 const mapStateToProps = ({

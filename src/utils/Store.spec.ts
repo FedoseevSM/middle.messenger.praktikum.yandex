@@ -1,5 +1,6 @@
-import store, { User } from "./Store";
 import { assert } from "chai";
+import type { User } from "./Store";
+import store from "./Store";
 
 const user: User = {
     id: 1,
@@ -21,7 +22,7 @@ describe("Store", () => {
         );
     });
 
-        it("Set and check equal User value in Store", () => {
+    it("Set and check equal User value in Store", () => {
         store!.set("currentUser", user);
         assert.equal(
             store!.getState().currentUser,

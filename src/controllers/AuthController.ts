@@ -47,7 +47,6 @@ class AuthController {
     async logout() {
         try {
             MessagesController.leave();
-            store.reset();
             await this.api.logout();
             this.router.go("/");
         } catch (err) {}
